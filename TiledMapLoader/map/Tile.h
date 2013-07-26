@@ -30,12 +30,12 @@ namespace Tiled
 
 	}
 
-	int getGid() const
+	unsigned getGid() const
 	{
 	    return _gid;
 	}
 
-	void setGid(int gid)
+	void setGid(unsigned gid)
 	{
 	    _gid = gid;
 	}
@@ -110,7 +110,7 @@ namespace Tiled
 	    _width = width;
 	}
     private:
-	int _gid;
+	unsigned _gid;
 	int _width;
 	int _height;
 	int _x;

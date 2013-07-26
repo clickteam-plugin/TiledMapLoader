@@ -30,12 +30,12 @@ namespace Tiled
 
 	}
 
-	int getFirstGid() const
+	unsigned getFirstGid() const
 	{
 	    return _firstGid;
 	}
 
-	void setFirstGid(int firstGid)
+	void setFirstGid(unsigned firstGid)
 	{
 	    _firstGid = firstGid;
 	}
@@ -185,7 +185,7 @@ namespace Tiled
 	std::string _name;
 	std::string _imageSource;
 	int _id;
-	int _firstGid;
+	unsigned _firstGid;
 	int _width;
 	int _height;
 	int _tileWidth;

@@ -15,7 +15,6 @@
 #include "utils/Base64.hpp"
 #include "TiledMapLoader.h"
 #include "Helper.hpp"
-
 namespace Tiled
 {
 
@@ -64,7 +63,7 @@ namespace Tiled
 		}
 		catch (rapidxml::parse_error &error)
 		{
-			std::string errorMessage("Parse error : "); 
+			std::string errorMessage("Parse error : ");
 
 			errorMessage.append(error.what());
 			throw std::logic_error(errorMessage);
@@ -83,8 +82,8 @@ namespace Tiled
 		map->setOrientation(getStringProperty(mapNode, "orientation"));
 		map->setTileWidth(getIntProperty(mapNode, "tilewidth"));
 		map->setTileHeight(getIntProperty(mapNode, "tileheight"));
-		map->setWidth(getIntProperty(mapNode, "width") * map->getTileWidth());
-		map->setHeight(getIntProperty(mapNode, "height") * map->getTileHeight());
+		map->setWidth(getIntProperty(mapNode, "width"));
+		map->setHeight(getIntProperty(mapNode, "height"));
 		loadTiledProperties(map, mapNode);
 		parseTilesets(map, mapNode);
 		parseLayers(map, mapNode);
@@ -175,8 +174,8 @@ namespace Tiled
 			if (!layerDataNode)
 				throw std::logic_error("Invalid tiled map : no layer data");
 			layer->setName(getStringProperty(layerNode, "name"));
-			layer->setWidth(getIntProperty(layerNode, "width") * map->getTileWidth());
-			layer->setHeight(getIntProperty(layerNode, "height") * map->getTileHeight());
+			layer->setWidth(getIntProperty(layerNode, "width"));
+			layer->setHeight(getIntProperty(layerNode, "height"));
 			layer->setVisible(getIntProperty(layerNode, "visible", 1));
 			layer->setOpacity(getFloatProperty(layerNode, "opacity", 1));
 			loadTiledProperties(layer, layerNode);
@@ -189,38 +188,42 @@ namespace Tiled
 	void TiledMapLoader::parseTiles(Map *map, Layer *layer, rapidxml::xml_node<> *layerDataNode)
 	{
 		rapidxml::xml_node<> *tileNode = 0;
+		unsigned mapIterator = 0;
+		unsigned gid = 0;
 
 		if (!strncmp(getStringProperty(layerDataNode, "encoding"), "base64", 6) && !strncmp(getStringProperty(layerDataNode, "compression"), "zlib", 4))
 		{
 			std::string base64Tiles = Base64::decode(trim(layerDataNode->value()));
-			mz_ulong maxNumbersOfGids = layer->getWidth() * layer->getHeight();
-			mz_ulong numbersOfGids = maxNumbersOfGids;
-			int *gids = new int[maxNumbersOfGids];
+			unsigned numberOfGids = layer->getWidth() * layer->getHeight();
+			unsigned tileIndex = 0;
+			mz_ulong uncompressSize = numberOfGids << 2;
+			unsigned char *gids = new unsigned char[uncompressSize];
 
 			if (!gids)
-				throw std::logic_error("Can't allocate memory");
+				throw std::logic_error("Uncompression failed : can't allocate memory");
 
-			if (mz_uncompress((unsigned char *) gids, &numbersOfGids, (unsigned char *) (base64Tiles.c_str()), base64Tiles.length()) != MZ_OK)
-				throw std::logic_error("ZLib error : can't uncompress data");
+			if (mz_uncompress(gids, &uncompressSize, (unsigned char *) base64Tiles.c_str(), base64Tiles.length()) != MZ_OK)
+				throw std::logic_error("Zlib error : uncompression failed");
 
-			for (mz_ulong i = 0; i < numbersOfGids; ++i)
+			while (mapIterator < numberOfGids)
 			{
-				int gid = gids[i];
-				if (gid > 0)
-					createTileFromGid(map, layer, gid, i);
+				gid = gids[tileIndex] | gids[tileIndex + 1] << 8 | gids[tileIndex + 2] << 16 | gids[tileIndex + 3] << 24;
+				if (gid)
+					createTileFromGid(map, layer, gid, mapIterator);
+				tileIndex += 4;
+				++mapIterator;
 			}
 			delete[] gids;
 		}
 		else
 		{
-			int mapIterator = 0;
 			tileNode = layerDataNode->first_node("tile");
 			if (!tileNode)
 				throw std::logic_error("Invalid tiled map : no tiles (only plain XML or ZLIB supported)");
 			while (tileNode)
 			{
-				int gid = getIntProperty(tileNode, "gid");
-				if (gid > 0)
+				gid = getIntProperty(tileNode, "gid");
+				if (gid)
 					createTileFromGid(map, layer, gid, mapIterator);
 				tileNode = tileNode->next_sibling("tile");
 				++mapIterator;

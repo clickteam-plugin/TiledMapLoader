@@ -16,15 +16,15 @@
 namespace Tiled
 {
 
-    const unsigned int FLIPPED_HORIZONTALLY_FLAG = 0x80000000;
-    const unsigned int FLIPPED_VERTICALLY_FLAG = 0x40000000;
-    const unsigned int FLIPPED_DIAGONALLY_FLAG = 0x20000000;
+    const unsigned FLIPPED_HORIZONTALLY_FLAG = 0x80000000;
+    const unsigned FLIPPED_VERTICALLY_FLAG = 0x40000000;
+    const unsigned FLIPPED_DIAGONALLY_FLAG = 0x20000000;
 
     class Object: public IProperty, private NonCopyable
     {
     public:
 	Object() :
-		_name(""), _type(""), _polygonType("object"), _vertices(""), _gid(-1), _x(0), _y(0), _width(0), _height(0), _visible(1), _flippedHorizontally(0), _flippedVertically(0), _flippedDiagonally(0), _rotation(0)
+		_name(""), _type(""), _polygonType("object"), _vertices(""), _gid(0), _x(0), _y(0), _width(0), _height(0), _visible(1), _flippedHorizontally(0), _flippedVertically(0), _flippedDiagonally(0), _rotation(0)
 	{
 
 	}
@@ -129,20 +129,17 @@ namespace Tiled
 	    _y = y;
 	}
 
-	int getGid() const
+	unsigned getGid() const
 	{
 	    return _gid;
 	}
 
-	void setGid(int gid)
+	void setGid(unsigned gid)
 	{
-	    if (gid != -1)
-	    {
-		_gid = gid & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG);
-		_flippedHorizontally = gid & FLIPPED_HORIZONTALLY_FLAG;
-		_flippedVertically = gid & FLIPPED_VERTICALLY_FLAG;
-		_flippedDiagonally = gid & FLIPPED_DIAGONALLY_FLAG;
-	    }
+	    _gid = gid & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG);
+	    _flippedHorizontally = gid & FLIPPED_HORIZONTALLY_FLAG;
+	    _flippedVertically = gid & FLIPPED_VERTICALLY_FLAG;
+	    _flippedDiagonally = gid & FLIPPED_DIAGONALLY_FLAG;
 	}
 
 	std::string getVertices() const
@@ -185,7 +182,7 @@ namespace Tiled
 	std::string _type;
 	std::string _polygonType;
 	std::string _vertices;
-	int _gid;
+	unsigned _gid;
 	int _x;
 	int _y;
 	int _width;
