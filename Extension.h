@@ -21,29 +21,28 @@ public:
 
 	/// Members
 
-	int _offsetX;
-	int _offsetY;
-	Tiled::TiledMapLoader *_tiledMapLoader;
-	Tiled::Map *_map;
-	Tiled::Tileset *_tileset;
-	Tiled::Layer *_layer;
-	Tiled::Tile *_tile;
-	Tiled::ObjectGroup *_objectGroup;
-	Tiled::Object *_object;
+	int mOffsetX;
+	int mOffsetY;
+	TiledMapLoader::TiledMapLoader mTiledMapLoader;
+	TiledMapLoader::Map *mMap;
+	TiledMapLoader::Tileset *mTileset;
+	TiledMapLoader::Layer *mLayer;
+	TiledMapLoader::Tile *mTile;
+	TiledMapLoader::ObjectGroup *mObjectGroup;
+	TiledMapLoader::Object *mObject;
 
 	/// Error handling
 
-	const char *_lastError;
+	const char *mLastError;
 	void raiseError(const char *);
 
 	/// Events
 
 	void raiseEvent(int eventCode);
-	void startParsing();
 
 	/// Actions
 
-	void loadMap(char *);
+	void loadMap(char *, char *);
 	void setMapOffset(int, int);
 
 	/// Conditions

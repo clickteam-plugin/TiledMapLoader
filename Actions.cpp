@@ -1,63 +1,65 @@
 #include "Common.h"
 
-void Extension::loadMap(char *mapFile)
+void Extension::loadMap(char *mapFile, char *mapPath)
 {
 	try
 	{
-		_tiledMapLoader = new Tiled::TiledMapLoader();
-		if (!_tiledMapLoader)
-			throw std::logic_error("Can't allocate memory");
-		_tiledMapLoader->loadFromFile(mapFile);
-		startParsing();
-	}
-	catch (std::logic_error &error)
-	{
-		raiseError(error.what());
-	}
-	delete _tiledMapLoader;
-	_tiledMapLoader = 0;
-}
+		TiledMapLoader::Map::Ptr map;
 
-void Extension::startParsing()
-{
-	_map = _tiledMapLoader->parseMap();
-	raiseEvent(Events::MAP_LOADED);
-	std::vector<Tiled::Tileset *> tilesets = _map->getTilesets();
-	std::vector<Tiled::Layer *> layers = _map->getLayers();
-	std::vector<Tiled::ObjectGroup *> objectGroups = _map->getObjectGroups();
+		if (mapPath && mapPath[0] != '\0')
+			map = mTiledMapLoader.loadMap(mapFile, mapPath);
+		else
+			map = mTiledMapLoader.loadMap(mapFile);
 
-	for (auto it = tilesets.begin(); it != tilesets.end(); ++it)
-	{
-		_tileset = *it;
-		raiseEvent(Events::TILESET_LOADED);
-	}
-	for (auto it = layers.begin(); it != layers.end(); ++it)
-	{
-		_layer = *it;
-		raiseEvent(Events::LAYER_LOADED);
-		std::vector<Tiled::Tile *> tiles = _layer->getTiles();
-		for (auto it_tile = tiles.begin(); it_tile != tiles.end(); ++it_tile)
+		mMap = map.get();
+		raiseEvent(Events::MAP_LOADED);
+
+		const auto &tilesets = map->getTilesets();
+		const auto &layers = map->getLayers();
+		const auto &objectGroups = map->getObjectGroups();
+
+		for (const auto &tileset : tilesets)
 		{
-			_tile = *it_tile;
-			raiseEvent(Events::TILE_LOADED);
+			mTileset = tileset.get();
+			raiseEvent(Events::TILESET_LOADED);
 		}
-	}
-	for (auto it = objectGroups.begin(); it != objectGroups.end(); ++it)
-	{
-		_objectGroup = *it;
-		raiseEvent(Events::OBJECT_GROUP_LOADED);
-		std::vector<Tiled::Object *> objects = _objectGroup->getObjects();
-		for (auto it_object = objects.begin(); it_object != objects.end(); ++it_object)
+		for (const auto &layer : layers)
 		{
-			_object = *it_object;
-			raiseEvent(Events::OBJECT_LOADED);
+			mLayer = layer.get();
+			raiseEvent(Events::LAYER_LOADED);
+
+			const auto &tiles = layer->getTiles();
+
+			for (const auto &tile : tiles)
+			{
+				mTile = tile.get();
+				raiseEvent(Events::TILE_LOADED);
+			}
 		}
+		for (const auto &objectGroup : objectGroups)
+		{
+			mObjectGroup = objectGroup.get();
+			raiseEvent(Events::OBJECT_GROUP_LOADED);
+
+			const auto &objects = objectGroup->getObjects();
+
+			for (const auto &object : objects)
+			{
+				mObject = object.get();
+				raiseEvent(Events::OBJECT_LOADED);
+			}
+		}
+		raiseEvent(Events::PARSING_FINISHED);
 	}
-	raiseEvent(Events::PARSING_FINISHED);
+	catch (std::exception &exception)
+	{
+		mLastError = exception.what();
+		raiseEvent(Events::RAISE_ERROR);
+	}
 }
 
 void Extension::setMapOffset(int offsetX, int offsetY)
 {
-	_offsetX = offsetX;
-	_offsetY = offsetY;
+	mOffsetX = offsetX;
+	mOffsetY = offsetY;
 }

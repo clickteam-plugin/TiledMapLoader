@@ -2,58 +2,58 @@
 
 char *Extension::getLastError()
 {
-	if (!_lastError)
-		return "";
-	return Runtime.CopyString(_lastError);
+	if (!mLastError)
+		return "No errors";
+	return Runtime.CopyString(mLastError);
 }
 
 int Extension::getMapWidth()
 {
-	if (!_map)
+	if (!mMap)
 		return 0;
-	return _map->getWidth();
+	return mMap->getWidth();
 }
 
 int Extension::getMapHeight()
 {
-	if (!_map)
+	if (!mMap)
 		return 0;
-	return _map->getHeight();
+	return mMap->getHeight();
 }
 
 int Extension::getMapTileWidth()
 {
-	if (!_map)
+	if (!mMap)
 		return 0;
-	return _map->getTileWidth();
+	return mMap->getTileWidth();
 }
 
 int Extension::getMapTileHeight()
 {
-	if (!_map)
+	if (!mMap)
 		return 0;
-	return _map->getTileHeight();
+	return mMap->getTileHeight();
 }
 
 char *Extension::getMapOrientation()
 {
-	if (!_map)
+	if (!mMap)
 		return "";
-	return Runtime.CopyString(_map->getOrientation().c_str());
+	return Runtime.CopyString(mMap->getOrientation().c_str());
 }
 
 char *Extension::getMapVersion()
 {
-	if (!_map)
+	if (!mMap)
 		return "";
-	return Runtime.CopyString(_map->getVersion().c_str());
+	return Runtime.CopyString(mMap->getVersion().c_str());
 }
 
 char *Extension::getMapProperty(char *name, char *defaultValue)
 {
-	if (!_map)
+	if (!mMap)
 		return defaultValue;
-	std::map<std::string, std::string> properties = _map->getProperties();
+	std::map<std::string, std::string> properties = mMap->getProperties();
 
 	std::map<std::string, std::string>::const_iterator it = properties.find(name);
 	if (it != properties.end())
@@ -64,94 +64,94 @@ char *Extension::getMapProperty(char *name, char *defaultValue)
 
 char *Extension::getTilesetName()
 {
-	if (!_tileset)
+	if (!mTileset)
 		return "";
-	return Runtime.CopyString(_tileset->getName().c_str());
+	return Runtime.CopyString(mTileset->getName().c_str());
 }
 
 char *Extension::getTilesetImagePath()
 {
-	if (!_tileset)
+	if (!mTileset)
 		return "";
-	return Runtime.CopyString(_tileset->getImageSource().c_str());
+	return Runtime.CopyString(mTileset->getImageSource().c_str());
 }
 
 int Extension::getTilesetId()
 {
-	if (!_tileset)
+	if (!mTileset)
 		return 0;
-	return _tileset->getId();
+	return mTileset->getId();
 }
 
 int Extension::getTilesetFirstGid()
 {
-	if (!_tileset)
+	if (!mTileset)
 		return 0;
-	return _tileset->getFirstGid();
+	return mTileset->getFirstGid();
 }
 
 int Extension::getTilesetWidth()
 {
-	if (!_tileset)
+	if (!mTileset)
 		return 0;
-	return _tileset->getWidth();
+	return mTileset->getWidth();
 }
 
 int Extension::getTilesetHeight()
 {
-	if (!_tileset)
+	if (!mTileset)
 		return 0;
-	return _tileset->getHeight();
+	return mTileset->getHeight();
 }
 
 int Extension::getTilesetTileWidth()
 {
-	if (!_tileset)
+	if (!mTileset)
 		return 0;
-	return _tileset->getTileWidth();
+	return mTileset->getTileWidth();
 }
 
 int Extension::getTilesetTileHeight()
 {
-	if (!_tileset)
+	if (!mTileset)
 		return 0;
-	return _tileset->getTileHeight();
+	return mTileset->getTileHeight();
 }
 
 int Extension::getTilesetSpacing()
 {
-	if (!_tileset)
+	if (!mTileset)
 		return 0;
-	return _tileset->getSpacing();
+	return mTileset->getSpacing();
 }
 
 int Extension::getTilesetMargin()
 {
-	if (!_tileset)
+	if (!mTileset)
 		return 0;
-	return _tileset->getMargin();
+	return mTileset->getMargin();
 }
 
 int Extension::getTilesetXTileOffset()
 {
-	if (!_tileset)
+	if (!mTileset)
 		return 0;
-	return _tileset->getOffsetX();
+	return mTileset->getOffsetX();
 }
 
 int Extension::getTilesetYTileOffset()
 {
-	if (!_tileset)
+	if (!mTileset)
 		return 0;
-	return _tileset->getOffsetY();
+	return mTileset->getOffsetY();
 
 }
 
 char *Extension::getTilesetProperty(char *name, char *defaultValue)
 {
-	if (!_tileset)
+	if (!mTileset)
 		return defaultValue;
-	std::map<std::string, std::string> properties = _tileset->getProperties();
+	std::map<std::string, std::string> properties = mTileset->getProperties();
 
 	std::map<std::string, std::string>::const_iterator it = properties.find(name);
 	if (it != properties.end())
@@ -161,44 +161,44 @@ char *Extension::getTilesetProperty(char *name, char *defaultValue)
 
 char *Extension::getLayerName()
 {
-	if (!_layer)
+	if (!mLayer)
 		return 0;
-	return Runtime.CopyString(_layer->getName().c_str());
+	return Runtime.CopyString(mLayer->getName().c_str());
 }
 
 int Extension::getLayerWidth()
 {
-	if (!_layer)
+	if (!mLayer)
 		return 0;
-	return _layer->getWidth();
+	return mLayer->getWidth();
 }
 
 int Extension::getLayerHeight()
 {
-	if (!_layer)
+	if (!mLayer)
 		return 0;
-	return _layer->getHeight();
+	return mLayer->getHeight();
 }
 
 float Extension::getLayerOpacity()
 {
-	if (!_layer)
+	if (!mLayer)
 		return 1;
-	return _layer->getOpacity();
+	return mLayer->getOpacity();
 }
 
 int Extension::isLayerVisible()
 {
-	if (!_layer)
+	if (!mLayer)
 		return 1;
-	return _layer->isVisible();
+	return mLayer->getVisible();
 }
 
 char *Extension::getLayerProperty(char *name, char *defaultValue)
 {
-	if (!_layer)
+	if (!mLayer)
 		return defaultValue;
-	std::map<std::string, std::string> properties = _layer->getProperties();
+	std::map<std::string, std::string> properties = mLayer->getProperties();
 
 	std::map<std::string, std::string>::const_iterator it = properties.find(name);
 	if (it != properties.end())
@@ -209,70 +209,70 @@ char *Extension::getLayerProperty(char *name, char *defaultValue)
 
 int Extension::getTileGid()
 {
-	if (!_tile)
+	if (!mTile)
 		return 0;
-	return _tile->getGid();
+	return mTile->getGid();
 }
 
 int Extension::getTileWidth()
 {
-	if (!_tile)
+	if (!mTile)
 		return 0;
-	return _tile->getWidth();
+	return mTile->getWidth();
 }
 
 int Extension::getTileHeight()
 {
-	if (!_tile)
+	if (!mTile)
 		return 0;
-	return _tile->getHeight();
+	return mTile->getHeight();
 }
 
 int Extension::getTilePositionOnMapX()
 {
-	if (!_tile)
+	if (!mTile)
 		return 0;
-	return _tile->getX() + _offsetX;
+	return mTile->getX() + mOffsetX;
 }
 
 int Extension::getTilePositionOnMapY()
 {
-	if (!_tile)
+	if (!mTile)
 		return 0;
-	return _tile->getY() + _offsetY;
+	return mTile->getY() + mOffsetY;
 }
 
 int Extension::getTileAssociatedTilesetId()
 {
-	if (!_tile)
+	if (!mTile)
 		return 0;
-	return _tile->getTilesetId();
+	return mTile->getTilesetId();
 }
 
 int Extension::getTilePositionOnTilesetX()
 {
-	if (!_tile)
+	if (!mTile)
 		return 0;
-	return _tile->getTilesetX();
+	return mTile->getTilesetX();
 }
 
 int Extension::getTilePositionOnTilesetY()
 {
-	if (!_tile)
+	if (!mTile)
 		return 0;
-	return _tile->getTilesetY();
+	return mTile->getTilesetY();
 }
 
 char *Extension::getTileProperty(char *name, char *defaultValue)
 {
-	if (!_tile)
+	if (!mTile)
 		return defaultValue;
 	try
 	{
-		Tiled::Tileset *tileset = _map->getTilesets().at(_tile->getTilesetId());
+		const auto &tileset = mMap->getTilesets().at(mTile->getTilesetId());
 		if (!tileset)
 			return defaultValue;
-		std::map<std::string, std::string> properties = tileset->getTileProperties()[_tile->getGid() - tileset->getFirstGid()];
+		std::map<std::string, std::string> properties = tileset->getTileProperties().at(mTile->getGid() - tileset->getFirstGid());
 
 		std::map<std::string, std::string>::const_iterator it = properties.find(name);
 		if (it != properties.end())
@@ -287,51 +287,51 @@ char *Extension::getTileProperty(char *name, char *defaultValue)
 
 char *Extension::getObjectGroupName()
 {
-	if (!_objectGroup)
+	if (!mObjectGroup)
 		return "";
-	return Runtime.CopyString(_objectGroup->getName().c_str());
+	return Runtime.CopyString(mObjectGroup->getName().c_str());
 }
 
 char *Extension::getObjectGroupDrawOrder()
 {
-	if (!_objectGroup)
+	if (!mObjectGroup)
 		return "";
-	return Runtime.CopyString(_objectGroup->getDrawOrder().c_str());
+	return Runtime.CopyString(mObjectGroup->getDrawOrder().c_str());
 }
 
 int Extension::getObjectGroupWidth()
 {
-	if (!_objectGroup)
+	if (!mObjectGroup)
 		return 0;
-	return _objectGroup->getWidth();
+	return mObjectGroup->getWidth();
 }
 
 int Extension::getObjectGroupHeight()
 {
-	if (!_objectGroup)
+	if (!mObjectGroup)
 		return 0;
-	return _objectGroup->getHeight();
+	return mObjectGroup->getHeight();
 }
 
 float Extension::getObjectGroupOpacity()
 {
-	if (!_objectGroup)
+	if (!mObjectGroup)
 		return 1;
-	return _objectGroup->getOpacity();
+	return mObjectGroup->getOpacity();
 }
 
 int Extension::isObjectGroupVisible()
 {
-	if (!_objectGroup)
+	if (!mObjectGroup)
 		return 1;
-	return _objectGroup->isVisible();
+	return mObjectGroup->getVisible();
 }
 
 char *Extension::getObjectGroupProperty(char *name, char *defaultValue)
 {
-	if (!_objectGroup)
+	if (!mObjectGroup)
 		return defaultValue;
-	std::map<std::string, std::string> properties = _objectGroup->getProperties();
+	std::map<std::string, std::string> properties = mObjectGroup->getProperties();
 
 	std::map<std::string, std::string>::const_iterator it = properties.find(name);
 	if (it != properties.end())
@@ -341,65 +341,65 @@ char *Extension::getObjectGroupProperty(char *name, char *defaultValue)
 
 char *Extension::getObjectName()
 {
-	if (!_object)
+	if (!mObject)
 		return "";
-	return Runtime.CopyString(_object->getName().c_str());
+	return Runtime.CopyString(mObject->getName().c_str());
 }
 
 char *Extension::getObjectType()
 {
-	if (!_object)
+	if (!mObject)
 		return "";
-	return Runtime.CopyString(_object->getType().c_str());
+	return Runtime.CopyString(mObject->getType().c_str());
 }
 
 int Extension::getObjectPosOnMapX()
 {
-	if (!_object)
+	if (!mObject)
 		return 0;
-	return _object->getX() + _offsetX;
+	return mObject->getX() + mOffsetX;
 }
 
 int Extension::getObjectPosOnMapY()
 {
-	if (!_object)
+	if (!mObject)
 		return 0;
-	return _object->getY() + _offsetY;
+	return mObject->getY() + mOffsetY;
 }
 
 int Extension::getObjectWidth()
 {
-	if (!_object)
+	if (!mObject)
 		return 0;
-	return _object->getWidth();
+	return mObject->getWidth();
 }
 
 int Extension::getObjectHeight()
 {
-	if (!_object)
+	if (!mObject)
 		return 0;
-	return _object->getHeight();
+	return mObject->getHeight();
 }
 
 float Extension::getObjectRotation()
 {
-	if (!_object)
+	if (!mObject)
 		return 0;
-	return _object->getRotation();
+	return mObject->getRotation();
 }
 
 int Extension::getObjectTileGid()
 {
-	if (!_object)
+	if (!mObject)
 		return 0;
-	return _object->getGid();
+	return mObject->getGid();
 }
 
 char *Extension::getObjectVertices(char *defaultValue)
 {
-	if (!_object)
+	if (!mObject)
 		return defaultValue;
-	const char *vertices = _object->getVertices().c_str();
+	const char *vertices = mObject->getVertices().c_str();
 	if (!vertices || !_strcmpi(vertices, ""))
 		return defaultValue;
 	return Runtime.CopyString(vertices);
@@ -407,9 +407,9 @@ char *Extension::getObjectVertices(char *defaultValue)
 
 char *Extension::getObjectBox2DVertices(char *defaultValue)
 {
-	if (!_object)
+	if (!mObject)
 		return defaultValue;
-	char *vertices = Runtime.CopyString(_object->getVertices().c_str());
+	char *vertices = Runtime.CopyString(mObject->getVertices().c_str());
 	if (!vertices || !_strcmpi(vertices, ""))
 		return defaultValue;
 	int i = 0;
@@ -424,58 +424,58 @@ char *Extension::getObjectBox2DVertices(char *defaultValue)
 
 int Extension::isObjectPolygon()
 {
-	if (!_object)
+	if (!mObject)
 		return 0;
-	return _object->getPolygonType() == "polygon";
+	return mObject->getPolygonType() == "polygon";
 }
 
 int Extension::isObjectPolyline()
 {
-	if (!_object)
+	if (!mObject)
 		return 0;
-	return _object->getPolygonType() == "polyline";
+	return mObject->getPolygonType() == "polyline";
 }
 
 int Extension::isObjectEllipse()
 {
-	if (!_object)
+	if (!mObject)
 		return 0;
-	return _object->getPolygonType() == "ellipse";
+	return mObject->getPolygonType() == "ellipse";
 }
 
 int Extension::isObjctFlippedHorizontally()
 {
-	if (!_object)
+	if (!mObject)
 		return 0;
-	return _object->isFlippedHorizontally();
+	return mObject->getFlippedHorizontally();
 }
 
 int Extension::isObjctFlippedVertically()
 {
-	if (!_object)
+	if (!mObject)
 		return 0;
-	return _object->isFlippedVertically();
+	return mObject->getFlippedVertically();
 }
 
 int Extension::isObjctFlippedDiagonally()
 {
-	if (!_object)
+	if (!mObject)
 		return 0;
-	return _object->isFlippedDiagonally();
+	return mObject->getFlippedDiagonally();
 }
 
 int Extension::isObjectVisible()
 {
-	if (!_object)
+	if (!mObject)
 		return 0;
-	return _object->isVisible();
+	return mObject->getVisible();
 }
 
 char *Extension::getObjectProperty(char *name, char *defaultValue)
 {
-	if (!_object)
+	if (!mObject)
 		return defaultValue;
-	std::map<std::string, std::string> properties = _object->getProperties();
+	std::map<std::string, std::string> properties = mObject->getProperties();
 
 	std::map<std::string, std::string>::const_iterator it = properties.find(name);
 	if (it != properties.end())

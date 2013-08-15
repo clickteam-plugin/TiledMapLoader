@@ -144,6 +144,7 @@
     <IntDir>.\ReleaseEditor\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
+    <IncludePath>.\TiledMapLoader\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>.\Debug\</OutDir>
@@ -151,12 +152,14 @@
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
     <EmbedManifest>false</EmbedManifest>
+    <IncludePath>.\TiledMapLoader\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Runtime|Win32'">
     <OutDir>.\ReleaseRuntime\</OutDir>
     <IntDir>.\ReleaseRuntime\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
+    <IncludePath>.\TiledMapLoader\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
     <OutDir>.\DebugUnicode\</OutDir>
@@ -164,18 +167,21 @@
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
     <EmbedManifest>false</EmbedManifest>
+    <IncludePath>.\TiledMapLoader\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Edittime Unicode|Win32'">
     <OutDir>.\ReleaseEditorUnicode\</OutDir>
     <IntDir>.\ReleaseEditorUnicode\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
+    <IncludePath>.\TiledMapLoader\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Runtime Unicode|Win32'">
     <OutDir>.\ReleaseRuntimeUnicode\</OutDir>
     <IntDir>.\ReleaseRuntimeUnicode\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
+    <IncludePath>.\TiledMapLoader\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug HWA|Win32'">
     <OutDir>$(Configuration)\</OutDir>
@@ -183,18 +189,21 @@
     <LinkIncremental>true</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
     <EmbedManifest>false</EmbedManifest>
+    <IncludePath>.\TiledMapLoader\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Edittime HWA|Win32'">
     <OutDir>$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
+    <IncludePath>.\TiledMapLoader\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Runtime HWA|Win32'">
     <OutDir>$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
+    <IncludePath>.\TiledMapLoader\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Edittime|Win32'">
     <Midl>
@@ -669,9 +678,16 @@
     <ClCompile Include="..\..\Lib\Edif.General.cpp" />
     <ClCompile Include="..\..\Lib\Edif.Runtime.cpp" />
     <ClCompile Include="..\..\Lib\json.c" />
-    <ClCompile Include="TiledMapLoader\Main.cpp" />
-    <ClCompile Include="TiledMapLoader\TiledMapLoader.cpp" />
-    <ClCompile Include="TiledMapLoader\utils\miniz.c" />
+    <ClCompile Include="TiledMapLoader\lib\miniz\miniz.c" />
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Layer.cpp" />
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Map.cpp" />
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Object.cpp" />
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\ObjectGroup.cpp" />
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Property.cpp" />
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Tile.cpp" />
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\TiledMapLoader.cpp" />
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Tileset.cpp" />
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\XMLElement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Ext.def" />
@@ -708,22 +724,20 @@
     <ClInclude Include="..\..\Inc\WinMacro.h" />
     <ClInclude Include="..\..\Inc\Edif.h" />
     <ClInclude Include="..\..\Inc\json.h" />
-    <ClInclude Include="TiledMapLoader\Helper.hpp" />
-    <ClInclude Include="TiledMapLoader\map\IProperty.hpp" />
-    <ClInclude Include="TiledMapLoader\map\Layer.h" />
-    <ClInclude Include="TiledMapLoader\map\Map.h" />
-    <ClInclude Include="TiledMapLoader\map\Object.h" />
-    <ClInclude Include="TiledMapLoader\map\ObjectGroup.h" />
-    <ClInclude Include="TiledMapLoader\map\Tile.h" />
-    <ClInclude Include="TiledMapLoader\map\Tileset.h" />
-    <ClInclude Include="TiledMapLoader\parsers\ITileParser.hpp" />
-    <ClInclude Include="TiledMapLoader\rapidxml\rapidxml.hpp" />
-    <ClInclude Include="TiledMapLoader\rapidxml\rapidxml_iterators.hpp" />
-    <ClInclude Include="TiledMapLoader\rapidxml\rapidxml_print.hpp" />
-    <ClInclude Include="TiledMapLoader\rapidxml\rapidxml_utils.hpp" />
-    <ClInclude Include="TiledMapLoader\TiledMapLoader.h" />
-    <ClInclude Include="TiledMapLoader\utils\Base64.hpp" />
-    <ClInclude Include="TiledMapLoader\utils\NonCopyable.hpp" />
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Base64.hpp" />
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Layer.h" />
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Map.h" />
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Object.h" />
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\ObjectGroup.h" />
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Property.h" />
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Tile.h" />
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\TiledMapLoader.h" />
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Tileset.h" />
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\XMLElement.h" />
+    <ClInclude Include="TiledMapLoader\lib\rapidxml\rapidxml.hpp" />
+    <ClInclude Include="TiledMapLoader\lib\rapidxml\rapidxml_iterators.hpp" />
+    <ClInclude Include="TiledMapLoader\lib\rapidxml\rapidxml_print.hpp" />
+    <ClInclude Include="TiledMapLoader\lib\rapidxml\rapidxml_utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Ext.rc" />

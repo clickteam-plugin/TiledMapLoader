@@ -63,13 +63,34 @@
     <ClCompile Include="..\..\Lib\json.c">
       <Filter>Global to all extensions\Edif\json</Filter>
     </ClCompile>
-    <ClCompile Include="TiledMapLoader\Main.cpp">
+    <ClCompile Include="TiledMapLoader\lib\miniz\miniz.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TiledMapLoader\TiledMapLoader.cpp">
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Layer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TiledMapLoader\utils\miniz.c">
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\ObjectGroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Property.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Tile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\TiledMapLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Tileset.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\XMLElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -169,55 +190,49 @@
     <ClInclude Include="..\..\Inc\json.h">
       <Filter>Global to all extensions\Edif\json</Filter>
     </ClInclude>
-    <ClInclude Include="TiledMapLoader\map\IProperty.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\map\Layer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\map\Map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\map\Object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\map\ObjectGroup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\map\Tile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\map\Tileset.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\parsers\ITileParser.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\rapidxml\rapidxml.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\rapidxml\rapidxml_iterators.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\rapidxml\rapidxml_print.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\rapidxml\rapidxml_utils.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\utils\NonCopyable.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\Helper.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TiledMapLoader\TiledMapLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TiledMapLoader\utils\Base64.hpp">
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Base64.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\ObjectGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Property.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Tile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\TiledMapLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Tileset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\XMLElement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\lib\rapidxml\rapidxml.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\lib\rapidxml\rapidxml_iterators.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\lib\rapidxml\rapidxml_print.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\lib\rapidxml\rapidxml_utils.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

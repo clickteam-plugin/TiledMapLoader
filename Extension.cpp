@@ -3,9 +3,9 @@
 Extension::Extension(LPRDATA _rdPtr, LPEDATA edPtr, fpcob cobPtr)
 	: rdPtr(_rdPtr), rhPtr(_rdPtr->rHo.hoAdRunHeader), Runtime(_rdPtr)
 {
-	_offsetX = 0;
-	_offsetY = 0;
-	_lastError = 0;
+	mOffsetX = 0;
+	mOffsetY = 0;
+	mLastError = nullptr;
 
 	LinkAction(Actions::LOAD_MAP, loadMap);
 	LinkAction(Actions::MAP_OFFSET, setMapOffset);
@@ -84,7 +84,7 @@ Extension::Extension(LPRDATA _rdPtr, LPEDATA edPtr, fpcob cobPtr)
 
 void Extension::raiseError(const char *error)
 {
-	_lastError = error;
+	mLastError = error;
 	raiseEvent(Events::RAISE_ERROR);
 }
 
@@ -95,8 +95,7 @@ void Extension::raiseEvent(int eventCode)
 
 Extension::~Extension()
 {
-	if (_tiledMapLoader)
-		delete _tiledMapLoader;
+	
 }
 
 short Extension::Handle()
