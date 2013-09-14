@@ -190,9 +190,6 @@
     <ClInclude Include="..\..\Inc\json.h">
       <Filter>Global to all extensions\Edif\json</Filter>
     </ClInclude>
-    <ClInclude Include="Constants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Base64.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -233,6 +230,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TiledMapLoader\lib\rapidxml\rapidxml_utils.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RExtension.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

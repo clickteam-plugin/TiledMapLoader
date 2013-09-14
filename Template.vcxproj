@@ -695,7 +695,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
-    <ClInclude Include="Constants.h" />
+    <ClInclude Include="RExtension.h" />
     <ClInclude Include="Extension.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="..\..\Inc\Ccx.h" />

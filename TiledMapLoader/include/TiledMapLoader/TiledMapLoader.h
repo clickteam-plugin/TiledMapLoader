@@ -28,8 +28,8 @@ namespace TiledMapLoader
 
 	private:
 		void loadTilesets(Map &map, rapidxml::xml_node<> &rootNode);
-		void loadExternalTileset(Map &map, int tilesetId, const std::string &tilesetFile);
-		void addTileset(Map &map, int tilesetId, rapidxml::xml_node<> &tilesetNode);
+		void loadExternalTileset(Map &map, int tilesetId, const std::string &tilesetFile, unsigned firstGid);
+		void addTileset(Map &map, int tilesetId, rapidxml::xml_node<> &tilesetNode, unsigned firstGid = 0);
 		void parseTilesetsTileProperties(Map &map, Tileset &tileset, rapidxml::xml_node<> &tilesetNode);
 		void loadLayers(Map &map, rapidxml::xml_node<> &rootNode);
 		void loadLayerTiles(Map &map, Layer &layer, rapidxml::xml_node<> &layerDataNode);

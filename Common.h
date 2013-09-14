@@ -5,7 +5,6 @@
 #include "Edif.h"
 #include "Resource.h"
 #include "TiledMapLoader\TiledMapLoader.h"
-#include "Constants.h"
 
 struct EDITDATA
 {

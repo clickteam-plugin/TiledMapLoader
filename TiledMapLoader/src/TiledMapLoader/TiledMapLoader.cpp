@@ -1,4 +1,4 @@
-#include <direct.h>
+#include <unistd.h>
 #include <cstring>
 
 #include <stdexcept>
@@ -39,16 +39,16 @@ namespace TiledMapLoader
 	Map::Ptr TiledMapLoader::loadMap(const std::string &mapFile, const std::string &mapPath)
 	{
 		Map::Ptr mapPtr(new Map);
+		changeCurrentDirectory(mapPath);
 		std::ifstream in(mapFile);
 		std::string fileContentString;
 
 		if (in.fail())
-			throw std::logic_error("File not found : " + mapFile);
+			throw std::logic_error("File not found : " + mapPath + "/" + mapFile);
 
 		fileContentString.assign(std::istreambuf_iterator<char>(in), std::istreambuf_iterator<char>());
 		fileContentString.push_back(0);
 
-		changeCurrentDirectory(mapPath);
 		loadInternalMap(*mapPtr.get(), &fileContentString[0]);
 		restoreCurrentDirectory();
 		return std::move(mapPtr);
@@ -56,13 +56,13 @@ namespace TiledMapLoader
 
 	inline void TiledMapLoader::changeCurrentDirectory(const std::string &mapPath)
 	{
-		_getcwd(mCwd, 1024);
-		_chdir(mapPath.c_str());
+		getcwd(mCwd, 1024);
+		chdir(mapPath.c_str());
 	}
 
 	void TiledMapLoader::restoreCurrentDirectory()
 	{
-		_chdir(mCwd);
+		chdir(mCwd);
 	}
 
 	void TiledMapLoader::loadInternalMap(Map &map, char *xml)
@@ -106,19 +106,15 @@ namespace TiledMapLoader
 			tilesetSource = tilesetElement.getString("source", nullptr);
 
 			if (tilesetSource)
-			{
-				loadExternalTileset(map, tilesetId, tilesetSource);
-			}
+				loadExternalTileset(map, tilesetId, tilesetSource, tilesetElement.getInt("firstgid"));
 			else
-			{
 				addTileset(map, tilesetId, *tilesetNode);
-			}
 			tilesetNode = tilesetNode->next_sibling("tileset");
 			++tilesetId;
 		}
 	}
 
-	void TiledMapLoader::loadExternalTileset(Map& map, int tilesetId, const std::string& tilesetFile)
+	void TiledMapLoader::loadExternalTileset(Map& map, int tilesetId, const std::string& tilesetFile, unsigned firstGid)
 	{
 		rapidxml::xml_document<> document;
 		rapidxml::xml_node<> *tilesetNode = nullptr;
@@ -138,10 +134,10 @@ namespace TiledMapLoader
 		if (!tilesetNode)
 			throw std::logic_error("Invalid tiled map : no tileset tag (external tileset " + tilesetFile + ")");
 
-		addTileset(map, tilesetId, *tilesetNode);
+		addTileset(map, tilesetId, *tilesetNode, firstGid);
 	}
 
-	void TiledMapLoader::addTileset(Map &map, int tilesetId, rapidxml::xml_node<> &tilesetNode)
+	void TiledMapLoader::addTileset(Map &map, int tilesetId, rapidxml::xml_node<> &tilesetNode, unsigned firstGid)
 	{
 		Tileset::Ptr tileset(new Tileset);
 		rapidxml::xml_node<> *tilesetImageNode = nullptr;
@@ -168,7 +164,10 @@ namespace TiledMapLoader
 			tileset->setOffsetY(0);
 		}
 		tileset->setId(tilesetId);
-		tileset->setFirstGid(tilesetElement.getInt("firstgid"));
+		if (firstGid)
+			tileset->setFirstGid(firstGid);
+		else
+			tileset->setFirstGid(tilesetElement.getInt("firstgid"));
 		tileset->setName(tilesetElement.getString("name"));
 		tileset->setTileWidth(tilesetElement.getInt("tilewidth"));
 		tileset->setTileHeight(tilesetElement.getInt("tileheight"));
