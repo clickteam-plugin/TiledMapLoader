@@ -1,4 +1,4 @@
-#include <unistd.h>
+#include <direct.h>
 #include <cstring>
 
 #include <stdexcept>
@@ -362,7 +362,7 @@ namespace TiledMapLoader
 			objectNature = objectNode->first_node("polygon");
 			if (objectNature)
 			{
-				XMLElement objectNatureElement(*objectNode);
+				XMLElement objectNatureElement(*objectNature);
 
 				object->setPolygonType("polygon");
 				object->setVertices(objectNatureElement.getString("points"));
@@ -371,7 +371,7 @@ namespace TiledMapLoader
 			objectNature = objectNode->first_node("polyline");
 			if (objectNature)
 			{
-				XMLElement objectNatureElement(*objectNode);
+				XMLElement objectNatureElement(*objectNature);
 
 				object->setPolygonType("polyline");
 				object->setVertices(objectNatureElement.getString("points"));
