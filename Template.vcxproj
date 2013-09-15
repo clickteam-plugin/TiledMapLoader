@@ -684,6 +684,7 @@
     <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Object.cpp" />
     <ClCompile Include="TiledMapLoader\src\TiledMapLoader\ObjectGroup.cpp" />
     <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Property.cpp" />
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\StringUtils.cpp" />
     <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Tile.cpp" />
     <ClCompile Include="TiledMapLoader\src\TiledMapLoader\TiledMapLoader.cpp" />
     <ClCompile Include="TiledMapLoader\src\TiledMapLoader\Tileset.cpp" />
@@ -730,6 +731,7 @@
     <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Object.h" />
     <ClInclude Include="TiledMapLoader\include\TiledMapLoader\ObjectGroup.h" />
     <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Property.h" />
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\StringUtils.h" />
     <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Tile.h" />
     <ClInclude Include="TiledMapLoader\include\TiledMapLoader\TiledMapLoader.h" />
     <ClInclude Include="TiledMapLoader\include\TiledMapLoader\Tileset.h" />

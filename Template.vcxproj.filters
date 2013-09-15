@@ -93,6 +93,9 @@
     <ClCompile Include="TiledMapLoader\src\TiledMapLoader\XMLElement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TiledMapLoader\src\TiledMapLoader\StringUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Ext.def">
@@ -233,6 +236,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RExtension.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMapLoader\include\TiledMapLoader\StringUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
