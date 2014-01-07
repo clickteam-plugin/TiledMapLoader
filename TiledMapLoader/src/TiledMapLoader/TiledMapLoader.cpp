@@ -1,4 +1,9 @@
-#include <unistd.h>
+#ifdef _WIN32
+	#include <direct.h>
+#else
+	#include <unistd.h>
+#endif
+
 #include <cstring>
 #include <stdexcept>
 #include <fstream>
@@ -207,7 +212,6 @@ namespace TiledMapLoader
 				throw std::logic_error("Invalid tiled map : no layer data tag");
 
 			XMLElement layerElement(*layerNode);
-			XMLElement layerDataElement(*layerDataNode);
 
 			layer->setId(layerId);
 			layer->setName(layerElement.getString("name"));
