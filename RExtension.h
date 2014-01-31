@@ -106,7 +106,7 @@ void raiseEvent(int eventCode);
 
 /// Actions
 
-void loadMap(char *, char *);
+void loadMap(char *);
 void setMapOffset(int, int);
 
 /// Conditions

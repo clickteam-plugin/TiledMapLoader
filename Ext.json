@@ -118,7 +118,7 @@
 		"Separator"
     ],
     "Actions": [
-		{"Title": "Load map %0 (Path : %1)", "Parameters": [ ["Filename", "Load map file (with extension)"], ["String", "Map path (if using external tilesets)"] ]},
+		{"Title": "Load map %0", "Parameters": [ ["Filename", "Load map file (with extension)"] ]},
 		{"Title": "Set map offset X : %0 Y : %1", "Parameters": [ ["Integer", "Map X Offset"], ["Integer", "Map Y Offset"] ]}
     ],
     "Conditions": [

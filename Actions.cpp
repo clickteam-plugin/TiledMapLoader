@@ -1,16 +1,12 @@
 #include "Common.h"
 
-void Extension::loadMap(char *mapFile, char *mapPath)
+void Extension::loadMap(char *mapFile)
 {
 	try
 	{
 		TiledMapLoader::Map::Ptr map;
 
-		if (mapPath && mapPath[0] != '\0')
-			map = mTiledMapLoader.loadMap(mapFile, mapPath);
-		else
-			map = mTiledMapLoader.loadMap(mapFile);
-
+		map = mTiledMapLoader.loadMap(mapFile);
 		mMap = map.get();
 		raiseEvent(Events::MAP_LOADED);
 
