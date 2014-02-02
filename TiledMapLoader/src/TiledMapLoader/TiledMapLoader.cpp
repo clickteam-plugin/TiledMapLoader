@@ -1,5 +1,7 @@
 #ifdef _WIN32
 	#include <direct.h>
+	#define chdir _chdir
+	#define getcwd _getcwd
 #else
 	#include <unistd.h>
 #endif

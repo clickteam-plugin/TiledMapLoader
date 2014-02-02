@@ -87,7 +87,6 @@ enum Expressions
 
 int mOffsetX;
 int mOffsetY;
-TiledMapLoader::TiledMapLoader mTiledMapLoader;
 TiledMapLoader::Map *mMap;
 TiledMapLoader::Tileset *mTileset;
 TiledMapLoader::Layer *mLayer;

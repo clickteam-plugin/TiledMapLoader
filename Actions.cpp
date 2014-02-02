@@ -1,12 +1,20 @@
 #include "Common.h"
 
+std::string getPathFromFile(const std::string &mapFile)
+{
+	std::size_t found = mapFile.find_last_of("/\\");
+
+	return mapFile.substr(0, found);
+}
+
 void Extension::loadMap(char *mapFile)
 {
 	try
 	{
 		TiledMapLoader::Map::Ptr map;
+		TiledMapLoader::TiledMapLoader loader;
 
-		map = mTiledMapLoader.loadMap(mapFile);
+		map = loader.loadMap(mapFile, getPathFromFile(mapFile));
 		mMap = map.get();
 		raiseEvent(Events::MAP_LOADED);
 
