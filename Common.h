@@ -6,9 +6,4 @@
 #include "Resource.h"
 #include "TiledMapLoader\TiledMapLoader.h"
 
-struct EDITDATA
-{
-	extHeader eHeader;
-};
-
 #include "Extension.h"

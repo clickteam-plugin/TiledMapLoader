@@ -16,7 +16,7 @@ void Extension::loadMap(char *mapFile)
 
 		map = loader.loadMap(mapFile, getPathFromFile(mapFile));
 		mMap = map.get();
-		raiseEvent(Events::MAP_LOADED);
+		raiseEvent(Conditions::CONDITION_MAP_LOADED);
 
 		const auto &tilesets = map->getTilesets();
 		const auto &layers = map->getLayers();
@@ -25,40 +25,40 @@ void Extension::loadMap(char *mapFile)
 		for (const auto &tileset : tilesets)
 		{
 			mTileset = tileset.get();
-			raiseEvent(Events::TILESET_LOADED);
+			raiseEvent(Conditions::CONDITION_TILESET_LOADED);
 		}
 		for (const auto &layer : layers)
 		{
 			mLayer = layer.get();
-			raiseEvent(Events::LAYER_LOADED);
+			raiseEvent(Conditions::CONDITION_LAYER_LOADED);
 
 			const auto &tiles = layer->getTiles();
 
 			for (const auto &tile : tiles)
 			{
 				mTile = tile.get();
-				raiseEvent(Events::TILE_LOADED);
+				raiseEvent(Conditions::CONDITION_TILE_LOADED);
 			}
 		}
 		for (const auto &objectGroup : objectGroups)
 		{
 			mObjectGroup = objectGroup.get();
-			raiseEvent(Events::OBJECT_GROUP_LOADED);
+			raiseEvent(Conditions::CONDITION_OBJECT_GROUP_LOADED);
 
 			const auto &objects = objectGroup->getObjects();
 
 			for (const auto &object : objects)
 			{
 				mObject = object.get();
-				raiseEvent(Events::OBJECT_LOADED);
+				raiseEvent(Conditions::CONDITION_OBJECT_LOADED);
 			}
 		}
-		raiseEvent(Events::PARSING_FINISHED);
+		raiseEvent(Conditions::CONDITION_PARSING_FINISHED);
 	}
 	catch (std::exception &exception)
 	{
 		mLastError = exception.what();
-		raiseEvent(Events::RAISE_ERROR);
+		raiseEvent(Conditions::CONDITION_RAISE_ERROR);
 	}
 }
 

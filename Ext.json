@@ -113,7 +113,8 @@
 			[57, "Is object flipped vertically ?"],
 			[58, "Is object flipped diagonally ?"],
 			[59, "Is object visible ?"],
-			[60, "Get object property"]
+			[60, "Get object property"],
+			[61, "Get object unique id"]
 		],
 		"Separator"
     ],
