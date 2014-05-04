@@ -39,12 +39,12 @@ namespace TiledMapLoader
 		void setVertices(const std::string& vertices);
 		int getVisible() const;
 		void setVisible(int visible);
-		int getWidth() const;
-		void setWidth(int width);
-		int getX() const;
-		void setX(int x);
-		int getY() const;
-		void setY(int y);
+		float getWidth() const;
+		void setWidth(float width);
+		float getX() const;
+		void setX(float x);
+		float getY() const;
+		void setY(float y);
 
 	private:
 		std::string mName;
@@ -52,10 +52,10 @@ namespace TiledMapLoader
 		std::string mPolygonType;
 		std::string mVertices;
 		unsigned mGid;
-		int mX;
-		int mY;
-		int mWidth;
-		int mHeight;
+		float mX;
+		float mY;
+		float mWidth;
+		float mHeight;
 		int mVisible;
 		int mFlippedHorizontally;
 		int mFlippedVertically;

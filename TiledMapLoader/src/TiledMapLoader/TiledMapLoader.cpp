@@ -333,10 +333,10 @@ namespace TiledMapLoader
 			object->setGid(objectGroupElement.getInt("gid", -1));
 			object->setName(objectGroupElement.getString("name"));
 			object->setType(objectGroupElement.getString("type"));
-			object->setX(objectGroupElement.getInt("x"));
-			object->setY(objectGroupElement.getInt("y"));
-			object->setWidth(objectGroupElement.getInt("width"));
-			object->setHeight(objectGroupElement.getInt("height"));
+			object->setX(objectGroupElement.getFloat("x"));
+			object->setY(objectGroupElement.getFloat("y"));
+			object->setWidth(objectGroupElement.getFloat("width"));
+			object->setHeight(objectGroupElement.getFloat("height"));
 			object->setRotation(objectGroupElement.getFloat("rotation"));
 			object->setVisible(objectGroupElement.getInt("visible", 1));
 

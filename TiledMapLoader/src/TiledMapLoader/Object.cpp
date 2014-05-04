@@ -48,12 +48,12 @@ namespace TiledMapLoader
 
 	int Object::getHeight() const
 	{
-		return mHeight;
+		return (int) mHeight;
 	}
 
 	void Object::setHeight(int height)
 	{
-		mHeight = height;
+		mHeight = (float) height;
 	}
 
 	const std::string& Object::getName() const
@@ -116,32 +116,32 @@ namespace TiledMapLoader
 		mVisible = visible;
 	}
 
-	int Object::getWidth() const
+	float Object::getWidth() const
 	{
 		return mWidth;
 	}
 
-	void Object::setWidth(int width)
+	void Object::setWidth(float width)
 	{
 		mWidth = width;
 	}
 
-	int Object::getX() const
+	float Object::getX() const
 	{
 		return mX;
 	}
 
-	void Object::setX(int x)
+	void Object::setX(float x)
 	{
 		mX = x;
 	}
 
-	int Object::getY() const
+	float Object::getY() const
 	{
 		return mY;
 	}
 
-	void Object::setY(int y)
+	void Object::setY(float y)
 	{
 		mY = y;
 	}

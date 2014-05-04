@@ -199,6 +199,7 @@
 		{"Title": "ObjectIsFlippedVertically(", "Returns": "Integer"},
 		{"Title": "ObjectIsFlippedDiagonally(", "Returns": "Integer"},
 		{"Title": "ObjectIsVisible(", "Returns": "Integer"},
-		{"Title": "ObjectProperty$(", "Returns": "String", "Parameters": [ ["String", "Property name"], ["String", "Default value if not found"] ]}
+		{"Title": "ObjectProperty$(", "Returns": "String", "Parameters": [ ["String", "Property name"], ["String", "Default value if not found"] ]},
+		{"Title": "ObjectUniqueId$(", "Returns": "String"}
     ]
 }

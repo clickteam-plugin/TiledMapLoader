@@ -357,21 +357,21 @@ int Extension::getObjectPosOnMapX()
 {
 	if (!mObject)
 		return 0;
-	return mObject->getX() + mOffsetX;
+	return (int) mObject->getX() + mOffsetX;
 }
 
 int Extension::getObjectPosOnMapY()
 {
 	if (!mObject)
 		return 0;
-	return mObject->getY() + mOffsetY;
+	return (int) mObject->getY() + mOffsetY;
 }
 
 int Extension::getObjectWidth()
 {
 	if (!mObject)
 		return 0;
-	return mObject->getWidth();
+	return (int) mObject->getWidth();
 }
 
 int Extension::getObjectHeight()
