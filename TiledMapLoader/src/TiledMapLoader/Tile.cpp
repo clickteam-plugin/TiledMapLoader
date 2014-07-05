@@ -1,5 +1,9 @@
 #include <TiledMapLoader/Tile.h>
 
+const unsigned FLIPPED_HORIZONTALLY_FLAG = 0x80000000;
+const unsigned FLIPPED_VERTICALLY_FLAG = 0x40000000;
+const unsigned FLIPPED_DIAGONALLY_FLAG = 0x20000000;
+
 namespace TiledMapLoader
 {
 
@@ -10,7 +14,10 @@ namespace TiledMapLoader
 
 	void Tile::setGid(unsigned gid)
 	{
-		mGid = gid;
+		mGid = gid & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG);
+		mFlippedHorizontally = gid & FLIPPED_HORIZONTALLY_FLAG;
+		mFlippedVertically = gid & FLIPPED_VERTICALLY_FLAG;
+		mFlippedDiagonally = gid & FLIPPED_DIAGONALLY_FLAG;
 	}
 
 	int Tile::getHeight() const

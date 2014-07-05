@@ -95,6 +95,7 @@ namespace TiledMapLoader
 		mWidth = width;
 	}
 
+	//TODO: Optimize this code
 	const Tileset &Map::getTilesetFromGid(unsigned gid) const
 	{
 		for (const Tileset::Ptr &tileset : mTilesets)

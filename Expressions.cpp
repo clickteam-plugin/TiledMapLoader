@@ -443,21 +443,21 @@ int Extension::isObjectEllipse()
 	return mObject->getPolygonType() == "ellipse";
 }
 
-int Extension::isObjctFlippedHorizontally()
+int Extension::isObjectFlippedHorizontally()
 {
 	if (!mObject)
 		return 0;
 	return mObject->getFlippedHorizontally();
 }
 
-int Extension::isObjctFlippedVertically()
+int Extension::isObjectFlippedVertically()
 {
 	if (!mObject)
 		return 0;
 	return mObject->getFlippedVertically();
 }
 
-int Extension::isObjctFlippedDiagonally()
+int Extension::isObjectFlippedDiagonally()
 {
 	if (!mObject)
 		return 0;

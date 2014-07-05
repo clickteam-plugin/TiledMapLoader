@@ -1,9 +1,9 @@
 #ifdef _WIN32
-	#include <direct.h>
-	#define chdir _chdir
-	#define getcwd _getcwd
+#include <direct.h>
+#define chdir _chdir
+#define getcwd _getcwd
 #else
-	#include <unistd.h>
+#include <unistd.h>
 #endif
 
 #include <cstring>
@@ -30,7 +30,7 @@ namespace TiledMapLoader
 		std::string fileContentString;
 
 		if (in.fail())
-			throw std::logic_error("File not found : " + mapPath + "/" + mapFile);
+			throw std::logic_error("File not found: " + mapPath + "/" + mapFile);
 
 		fileContentString.assign(std::istreambuf_iterator<char>(in), std::istreambuf_iterator<char>());
 		fileContentString.push_back(0);
@@ -60,7 +60,7 @@ namespace TiledMapLoader
 		rootNode = document.first_node("map");
 
 		if (!rootNode)
-			throw std::logic_error("Invalid tiled map : no map tag");
+			throw std::logic_error("Invalid tiled map: no map tag");
 
 		rapidxml::xml_node<> &rootNodeRef = *rootNode;
 
@@ -84,7 +84,7 @@ namespace TiledMapLoader
 		int tilesetId = 0;
 
 		if (!tilesetNode)
-			throw std::logic_error("Invalid tiled map : no tileset tag");
+			throw std::logic_error("Invalid tiled map: no tileset tag");
 
 		while (tilesetNode)
 		{
@@ -118,7 +118,7 @@ namespace TiledMapLoader
 		tilesetNode = document.first_node("tileset");
 
 		if (!tilesetNode)
-			throw std::logic_error("Invalid tiled map : no tileset tag (external tileset " + tilesetFile + ")");
+			throw std::logic_error("Invalid tiled map: no tileset tag (external tileset " + tilesetFile + ")");
 
 		addTileset(map, tilesetId, *tilesetNode, firstGid);
 	}
@@ -132,7 +132,7 @@ namespace TiledMapLoader
 		tilesetImageNode = tilesetNode.first_node("image");
 
 		if (!tilesetImageNode)
-			throw std::logic_error("Invalid tiled map : no tileset image tag");
+			throw std::logic_error("Invalid tiled map: no tileset image tag");
 
 		XMLElement tilesetElement(tilesetNode);
 		XMLElement tilesetImageElement(*tilesetImageNode);
@@ -205,7 +205,7 @@ namespace TiledMapLoader
 
 		layerNode = rootNode.first_node("layer");
 		if (!layerNode)
-			throw std::logic_error("Invalid tiled map : no layer tag");
+			throw std::logic_error("Invalid tiled map: no layer tag");
 		while (layerNode)
 		{
 			Layer::Ptr layer(new Layer);
@@ -245,10 +245,10 @@ namespace TiledMapLoader
 			unsigned char *gids = new unsigned char[uncompressSize];
 
 			if (!gids)
-				throw std::logic_error("Uncompression failed : can't allocate memory");
+				throw std::logic_error("Uncompression failed: can't allocate memory");
 
-			if (mz_uncompress(gids, &uncompressSize, (unsigned char *) base64Tiles.c_str(), base64Tiles.length()) != MZ_OK)
-				throw std::logic_error("Zlib error : uncompression failed");
+			if (mz_uncompress(gids, &uncompressSize, (unsigned char *)base64Tiles.c_str(), base64Tiles.length()) != MZ_OK)
+				throw std::logic_error("Zlib error: uncompression failed");
 
 			while (mapIterator < numberOfGids)
 			{
@@ -264,7 +264,7 @@ namespace TiledMapLoader
 		{
 			tileNode = layerDataNode.first_node("tile");
 			if (!tileNode)
-				throw std::logic_error("Invalid tiled map : no tiles (only plain XML or ZLIB supported)");
+				throw std::logic_error("Invalid tiled map: no tiles (only plain XML or ZLIB supported)");
 			while (tileNode)
 			{
 				XMLElement tileElement(*tileNode);
