@@ -20,6 +20,36 @@ namespace TiledMapLoader
 		mFlippedDiagonally = gid & FLIPPED_DIAGONALLY_FLAG;
 	}
 
+	int Tile::getFlippedDiagonally() const
+	{
+		return mFlippedDiagonally;
+	}
+
+	void Tile::setFlippedDiagonally(int flippedDiagonally)
+	{
+		mFlippedDiagonally = flippedDiagonally;
+	}
+
+	int Tile::getFlippedHorizontally() const
+	{
+		return mFlippedHorizontally;
+	}
+
+	void Tile::setFlippedHorizontally(int flippedHorizontally)
+	{
+		mFlippedHorizontally = flippedHorizontally;
+	}
+
+	int Tile::getFlippedVertically() const
+	{
+		return mFlippedVertically;
+	}
+
+	void Tile::setFlippedVertically(int flippedVertically)
+	{
+		mFlippedVertically = flippedVertically;
+	}
+
 	int Tile::getHeight() const
 	{
 		return mHeight;

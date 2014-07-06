@@ -12,6 +12,7 @@
 		[0, "Load map"],
 		"Separator",
 		[1, "Set map offset"]
+		// Last ID 1
     ],
     "ConditionMenu": [
 		"Separator",
@@ -38,6 +39,7 @@
 		["Object",
 			[7, "On object loaded"]
 		]
+		// Last ID 7
     ],
     "ExpressionMenu": [
 		"Separator",
@@ -84,6 +86,9 @@
 			[32, "Get tile associated tileset id"],
 			[33, "Get tile position X on tileset"],
 			[34, "Get tile position Y on tileset"],
+			[62, "Is tile flipped horizontally ?"],
+			[63, "Is tile flipped vertically ?"],
+			[64, "Is tile flipped diagonally ?"],
 			[35, "Get tile property"]
 		],
 		["Object Group",
@@ -115,6 +120,7 @@
 			[59, "Is object visible ?"],
 			[60, "Get object property"],
 			[61, "Get object unique id"]
+			// Last ID 64
 		],
 		"Separator"
     ],
@@ -200,6 +206,10 @@
 		{"Title": "ObjectIsFlippedDiagonally(", "Returns": "Integer"},
 		{"Title": "ObjectIsVisible(", "Returns": "Integer"},
 		{"Title": "ObjectProperty$(", "Returns": "String", "Parameters": [ ["String", "Property name"], ["String", "Default value if not found"] ]},
-		{"Title": "ObjectUniqueId$(", "Returns": "String"}
+		{"Title": "ObjectUniqueId$(", "Returns": "String"},
+
+		{"Title": "TileIsFlippedHorizontally(", "Returns": "Integer"},
+		{"Title": "TileIsFlippedVertically(", "Returns": "Integer"},
+		{"Title": "TileIsFlippedDiagonally(", "Returns": "Integer"}
     ]
 }

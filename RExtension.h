@@ -81,7 +81,10 @@ enum Expressions
 	EXPRESSION_OBJECT_IS_FLIPPED_DIAGONALLY,
 	EXPRESSION_OBJECT_IS_VISIBLE,
 	EXPRESSION_OBJECT_PROPERTY,
-	EXPRESSION_OBJECT_UNIQUEID
+	EXPRESSION_OBJECT_UNIQUEID,
+	EXPRESSION_TILE_IS_FLIPPED_HORIZONTALLY,
+	EXPRESSION_TILE_IS_FLIPPED_VERTICALLY,
+	EXPRESSION_TILE_IS_FLIPPED_DIAGONALLY
 };
 
 /// Members
@@ -161,6 +164,9 @@ int getTilePositionOnMapY();
 int getTileAssociatedTilesetId();
 int getTilePositionOnTilesetX();
 int getTilePositionOnTilesetY();
+int isTileFlippedHorizontally();
+int isTileFlippedVertically();
+int isTileFlippedDiagonally();
 char *getTileProperty(char *, char *);
 
 char *getObjectGroupName();

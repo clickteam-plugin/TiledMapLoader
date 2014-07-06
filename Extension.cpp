@@ -54,6 +54,9 @@ Extension::Extension(LPRDATA _rdPtr, LPEDATA edPtr, fpcob cobPtr)
 	LinkExpression(Expressions::EXPRESSION_TILE_ASSOC_TILESET_ID, getTileAssociatedTilesetId);
 	LinkExpression(Expressions::EXPRESSION_TILE_POS_TILESET_X, getTilePositionOnTilesetX);
 	LinkExpression(Expressions::EXPRESSION_TILE_POS_TILESET_Y, getTilePositionOnTilesetY);
+	LinkExpression(Expressions::EXPRESSION_TILE_IS_FLIPPED_HORIZONTALLY, isTileFlippedHorizontally);
+	LinkExpression(Expressions::EXPRESSION_TILE_IS_FLIPPED_VERTICALLY, isTileFlippedHorizontally);
+	LinkExpression(Expressions::EXPRESSION_TILE_IS_FLIPPED_DIAGONALLY, isTileFlippedDiagonally);
 	LinkExpression(Expressions::EXPRESSION_TILE_PROPERTY, getTileProperty);
 	LinkExpression(Expressions::EXPRESSION_OBJECT_GROUP_NAME, getObjectGroupName);
 	LinkExpression(Expressions::EXPRESSION_OBJECT_GROUP_DRAW_ORDER, getObjectGroupDrawOrder);
@@ -75,9 +78,9 @@ Extension::Extension(LPRDATA _rdPtr, LPEDATA edPtr, fpcob cobPtr)
 	LinkExpression(Expressions::EXPRESSION_OBJECT_IS_POLYGON, isObjectPolygon);
 	LinkExpression(Expressions::EXPRESSION_OBJECT_IS_POLYLINE, isObjectPolyline);
 	LinkExpression(Expressions::EXPRESSION_OBJECT_IS_ELLIPSE, isObjectEllipse);
-	LinkExpression(Expressions::EXPRESSION_OBJECT_IS_FLIPPED_HORIZONTALLY, isObjectVisible);
-	LinkExpression(Expressions::EXPRESSION_OBJECT_IS_FLIPPED_VERTICALLY, isObjectVisible);
-	LinkExpression(Expressions::EXPRESSION_OBJECT_IS_FLIPPED_DIAGONALLY, isObjectVisible);
+	LinkExpression(Expressions::EXPRESSION_OBJECT_IS_FLIPPED_HORIZONTALLY, isObjectFlippedHorizontally);
+	LinkExpression(Expressions::EXPRESSION_OBJECT_IS_FLIPPED_VERTICALLY, isObjectFlippedVertically);
+	LinkExpression(Expressions::EXPRESSION_OBJECT_IS_FLIPPED_DIAGONALLY, isObjectFlippedDiagonally);
 	LinkExpression(Expressions::EXPRESSION_OBJECT_IS_VISIBLE, isObjectVisible);
 	LinkExpression(Expressions::EXPRESSION_OBJECT_PROPERTY, getObjectProperty);
 	LinkExpression(Expressions::EXPRESSION_OBJECT_UNIQUEID, getObjectUniqueId);

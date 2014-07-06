@@ -18,6 +18,8 @@
 enum {
 	PROPID_SETTINGS = PROPID_EXTITEM_CUSTOM_FIRST,
 
+	PROPID_EXT_VERSION
+
 // Example
 // -------
 //	PROPID_TEXTTITLE,	
@@ -50,6 +52,8 @@ PropData Properties[] = {
 //	PropData_CheckBox	(PROPID_CHECK,		IDS_PROP_CHECK,			IDS_PROP_CHECK_INFO),
 //	PropData_ComboBox	(PROPID_COMBO,		IDS_PROP_COMBO,			IDS_PROP_COMBO,	ComboList),
 //	PropData_Color		(PROPID_COLOR,		IDS_PROP_COLOR,			IDS_PROP_COLOR_INFO),
+
+	PropData_StaticString(PROPID_EXT_VERSION, IDS_EXT_VERSION, IDS_EXT_VERSION),
 
 
 	// End of table (required)
@@ -401,6 +405,12 @@ void WINAPI DLLExport ReleasePropCreateParam(LPMV mV, LPEDATA edPtr, UINT nPropI
 LPVOID WINAPI DLLExport GetPropValue(LPMV mV, LPEDATA edPtr, UINT nPropID)
 {
 #ifndef RUN_ONLY
+
+	switch (nPropID) {
+	case PROPID_EXT_VERSION:
+		return new CPropAStringValue(EXT_VERSION);
+	}
+
 	// Example
 	// -------
 //	switch (nPropID) {

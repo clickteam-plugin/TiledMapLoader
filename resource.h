@@ -1,7 +1,8 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by Ext.rc
 //
+#define IDS_EXT_VERSION                 5
 #define IDR_EDIF_ICON                   101
 #define IDR_EDIF_JSON                   102
 

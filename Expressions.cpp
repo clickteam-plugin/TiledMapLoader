@@ -263,6 +263,27 @@ int Extension::getTilePositionOnTilesetY()
 	return mTile->getTilesetY();
 }
 
+int Extension::isTileFlippedHorizontally()
+{
+	if (!mTile)
+		return 0;
+	return mTile->getFlippedHorizontally();
+}
+
+int Extension::isTileFlippedVertically()
+{
+	if (!mTile)
+		return 0;
+	return mTile->getFlippedVertically();
+}
+
+int Extension::isTileFlippedDiagonally()
+{
+	if (!mTile)
+		return 0;
+	return mTile->getFlippedDiagonally();
+}
+
 char *Extension::getTileProperty(char *name, char *defaultValue)
 {
 	if (!mTile)
