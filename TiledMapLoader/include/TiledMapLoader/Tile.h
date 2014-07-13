@@ -35,6 +35,9 @@ namespace TiledMapLoader
 
 	private:
 		unsigned mGid;
+		int mFlippedHorizontally;
+		int mFlippedVertically;
+		int mFlippedDiagonally;
 		int mWidth;
 		int mHeight;
 		int mX;
@@ -42,9 +45,6 @@ namespace TiledMapLoader
 		int mTilesetId;
 		int mTilesetX;
 		int mTilesetY;
-		int mFlippedHorizontally;
-		int mFlippedVertically;
-		int mFlippedDiagonally;
 	};
 
 }

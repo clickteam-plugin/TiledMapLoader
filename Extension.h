@@ -1,5 +1,5 @@
 #define IDS_EXT_VERSION	5
-#define EXT_VERSION "tiledmaploader #10"
+#define EXT_VERSION "tiledmaploader #11"
 
 class Extension
 {

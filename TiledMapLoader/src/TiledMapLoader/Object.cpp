@@ -7,6 +7,19 @@ const unsigned FLIPPED_DIAGONALLY_FLAG = 0x20000000;
 namespace TiledMapLoader
 {
 
+	unsigned Object::getGid() const
+	{
+		return mGid;
+	}
+
+	void Object::setGid(unsigned gid)
+	{
+		mGid = gid & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG);
+		mFlippedHorizontally = gid & FLIPPED_HORIZONTALLY_FLAG;
+		mFlippedVertically = gid & FLIPPED_VERTICALLY_FLAG;
+		mFlippedDiagonally = gid & FLIPPED_DIAGONALLY_FLAG;
+	}
+
 	int Object::getFlippedDiagonally() const
 	{
 		return mFlippedDiagonally;
@@ -35,19 +48,6 @@ namespace TiledMapLoader
 	void Object::setFlippedVertically(int flippedVertically)
 	{
 		mFlippedVertically = flippedVertically;
-	}
-
-	unsigned Object::getGid() const
-	{
-		return mGid;
-	}
-
-	void Object::setGid(unsigned gid)
-	{
-		mGid = gid & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG);
-		mFlippedHorizontally = gid & FLIPPED_HORIZONTALLY_FLAG;
-		mFlippedVertically = gid & FLIPPED_VERTICALLY_FLAG;
-		mFlippedDiagonally = gid & FLIPPED_DIAGONALLY_FLAG;
 	}
 
 	int Object::getHeight() const

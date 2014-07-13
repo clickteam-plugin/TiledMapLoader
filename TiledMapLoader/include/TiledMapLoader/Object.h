@@ -13,14 +13,14 @@ namespace TiledMapLoader
 	public:
 		typedef std::unique_ptr<Object> Ptr;
 
+		unsigned getGid() const;
+		void setGid(unsigned gid);
 		int getFlippedDiagonally() const;
 		void setFlippedDiagonally(int flippedDiagonally);
 		int getFlippedHorizontally() const;
 		void setFlippedHorizontally(int flippedHorizontally);
 		int getFlippedVertically() const;
 		void setFlippedVertically(int flippedVertically);
-		unsigned getGid() const;
-		void setGid(unsigned gid);
 		int getHeight() const;
 		void setHeight(int height);
 		const std::string& getName() const;
@@ -43,19 +43,19 @@ namespace TiledMapLoader
 		void setY(float y);
 
 	private:
+		unsigned mGid;
+		int mFlippedHorizontally;
+		int mFlippedVertically;
+		int mFlippedDiagonally;
 		std::string mName;
 		std::string mType;
 		std::string mPolygonType;
 		std::string mVertices;
-		unsigned mGid;
 		float mX;
 		float mY;
 		float mWidth;
 		float mHeight;
 		int mVisible;
-		int mFlippedHorizontally;
-		int mFlippedVertically;
-		int mFlippedDiagonally;
 		float mRotation;
 	};
 
