@@ -83,7 +83,7 @@ Extension::Extension(LPRDATA _rdPtr, LPEDATA edPtr, fpcob cobPtr)
 	LinkExpression(Expressions::EXPRESSION_OBJECT_IS_FLIPPED_DIAGONALLY, isObjectFlippedDiagonally);
 	LinkExpression(Expressions::EXPRESSION_OBJECT_IS_VISIBLE, isObjectVisible);
 	LinkExpression(Expressions::EXPRESSION_OBJECT_PROPERTY, getObjectProperty);
-	LinkExpression(Expressions::EXPRESSION_OBJECT_UNIQUEID, getObjectUniqueId);
+	LinkExpression(Expressions::EXPRESSION_OBJECT_ID, getObjectId);
 }
 
 void Extension::raiseError(const char *error)

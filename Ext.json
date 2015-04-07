@@ -119,7 +119,7 @@
 			[58, "Is object flipped diagonally ?"],
 			[59, "Is object visible ?"],
 			[60, "Get object property"],
-			[61, "Get object unique id"]
+			[61, "Get object id"]
 			// Last ID 64
 		],
 		"Separator"
@@ -206,7 +206,7 @@
 		{"Title": "ObjectIsFlippedDiagonally(", "Returns": "Integer"},
 		{"Title": "ObjectIsVisible(", "Returns": "Integer"},
 		{"Title": "ObjectProperty$(", "Returns": "String", "Parameters": [ ["String", "Property name"], ["String", "Default value if not found"] ]},
-		{"Title": "ObjectUniqueId$(", "Returns": "String"},
+		{"Title": "ObjectId(", "Returns": "Integer"},
 
 		{"Title": "TileIsFlippedHorizontally(", "Returns": "Integer"},
 		{"Title": "TileIsFlippedVertically(", "Returns": "Integer"},

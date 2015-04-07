@@ -504,10 +504,8 @@ char *Extension::getObjectProperty(char *name, char *defaultValue)
 	return __(defaultValue);
 }
 
-char *Extension::getObjectUniqueId() {
+int Extension::getObjectId() {
 	if (!mObject)
-		return __("");
-	std::ostringstream stringstream;
-	stringstream << mObject->getName() << mObject->getType() << mObject->getX() << mObject->getY();
-	return __(stringstream.str().c_str());
+		return -1;
+	return mObject->getId();
 }

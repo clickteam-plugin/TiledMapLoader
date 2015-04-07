@@ -81,7 +81,7 @@ enum Expressions
 	EXPRESSION_OBJECT_IS_FLIPPED_DIAGONALLY,
 	EXPRESSION_OBJECT_IS_VISIBLE,
 	EXPRESSION_OBJECT_PROPERTY,
-	EXPRESSION_OBJECT_UNIQUEID,
+	EXPRESSION_OBJECT_ID,
 	EXPRESSION_TILE_IS_FLIPPED_HORIZONTALLY,
 	EXPRESSION_TILE_IS_FLIPPED_VERTICALLY,
 	EXPRESSION_TILE_IS_FLIPPED_DIAGONALLY
@@ -195,4 +195,4 @@ int isObjectFlippedVertically();
 int isObjectFlippedDiagonally();
 int isObjectVisible();
 char *getObjectProperty(char *, char *);
-char *getObjectUniqueId();
+int getObjectId();

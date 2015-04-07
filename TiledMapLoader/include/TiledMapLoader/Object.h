@@ -15,6 +15,8 @@ namespace TiledMapLoader
 
 		unsigned getGid() const;
 		void setGid(unsigned gid);
+		unsigned getId() const;
+		void setId(unsigned id);
 		int getFlippedDiagonally() const;
 		void setFlippedDiagonally(int flippedDiagonally);
 		int getFlippedHorizontally() const;
@@ -44,6 +46,7 @@ namespace TiledMapLoader
 
 	private:
 		unsigned mGid;
+		int mId;
 		int mFlippedHorizontally;
 		int mFlippedVertically;
 		int mFlippedDiagonally;

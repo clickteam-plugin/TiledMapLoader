@@ -331,6 +331,7 @@ namespace TiledMapLoader
 			XMLElement objectGroupElement(*objectNode);
 
 			object->setGid(objectGroupElement.getInt("gid", -1));
+			object->setId(objectGroupElement.getInt("id", -1));
 			object->setName(objectGroupElement.getString("name"));
 			object->setType(objectGroupElement.getString("type"));
 			object->setX(objectGroupElement.getFloat("x"));

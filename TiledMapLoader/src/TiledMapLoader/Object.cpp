@@ -20,6 +20,16 @@ namespace TiledMapLoader
 		mFlippedDiagonally = gid & FLIPPED_DIAGONALLY_FLAG;
 	}
 
+	unsigned Object::getId() const
+	{
+		return mId;
+	}
+
+	void Object::setId(unsigned id)
+	{
+		mId = id;
+	}
+
 	int Object::getFlippedDiagonally() const
 	{
 		return mFlippedDiagonally;
