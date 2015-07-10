@@ -116,22 +116,18 @@ short Extension::Continue() {
 }
 
 bool Extension::Save(HANDLE File) {
-	bool OK = false;
-
-#ifndef VITALIZE
-	OK = true;
-#endif
-
+	auto OK = false;
+	#ifndef VITALIZE
+		OK = true;
+	#endif
 	return OK;
 }
 
 bool Extension::Load(HANDLE File) {
-	bool OK = false;
-
-#ifndef VITALIZE
-	OK = true;
-#endif
-
+	auto OK = false;
+	#ifndef VITALIZE
+		OK = true;
+	#endif
 	return OK;
 }
 

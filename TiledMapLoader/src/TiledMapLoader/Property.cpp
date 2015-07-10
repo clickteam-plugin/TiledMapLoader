@@ -32,8 +32,8 @@ namespace TiledMapLoader {
 			nodeProperty = nodeProperties->first_node("property");
 			while (nodeProperty) {
 				XMLElement propertyNode(*nodeProperty);
-				char *name = propertyNode.getString("name");
-				char *value = propertyNode.getString("value");
+				auto name = propertyNode.getString("name");
+				auto value = propertyNode.getString("value");
 				if (name && value) {
 					addProperty(name, value);
 				}

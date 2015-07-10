@@ -53,7 +53,7 @@ namespace TiledMapLoader {
 		if (!rootNode) {
 			throw std::logic_error("Invalid tiled map: no map tag");
 		}
-		rapidxml::xml_node<> &rootNodeRef = *rootNode;
+		auto &rootNodeRef = *rootNode;
 		XMLElement mapElement(*rootNode);
 		map.setVersion(mapElement.getString("version"));
 		map.setWidth(mapElement.getInt("width"));
@@ -68,9 +68,9 @@ namespace TiledMapLoader {
 	}
 
 	void TiledMapLoader::loadTilesets(Map &map, rapidxml::xml_node<> &rootNode) {
-		rapidxml::xml_node<> *tilesetNode = rootNode.first_node("tileset");
+		auto tilesetNode = rootNode.first_node("tileset");
 		char *tilesetSource = nullptr;
-		int tilesetId = 0;
+		auto tilesetId = 0;
 		if (!tilesetNode) {
 			throw std::logic_error("Invalid tiled map: no tileset tag");
 		}
@@ -204,11 +204,11 @@ namespace TiledMapLoader {
 		unsigned mapIterator = 0;
 		unsigned gid = 0;
 		if (!strncmp(layerDataElement.getString("encoding"), "base64", 6) && !strncmp(layerDataElement.getString("compression"), "zlib", 4)) {
-			std::string base64Tiles = Base64::decode(trim(layerDataElement.getValue()));
+			auto base64Tiles = Base64::decode(trim(layerDataElement.getValue()));
 			unsigned numberOfGids = layer.getWidth()  *layer.getHeight();
 			unsigned tileIndex = 0;
 			mz_ulong uncompressSize = numberOfGids << 2;
-			unsigned char *gids = new unsigned char[uncompressSize];
+			auto gids = new unsigned char[uncompressSize];
 			if (!gids) {
 				throw std::logic_error("Uncompression failed: can't allocate memory");
 			}
@@ -243,9 +243,9 @@ namespace TiledMapLoader {
 
 	void TiledMapLoader::createTileFromGid(Map &map, Layer &layer, unsigned gid, unsigned mapIterator) {
 		Tile::Ptr tile(new Tile);
-		Tile &tileRef = *tile.get();
+		auto &tileRef = *tile.get();
 		tile->setGid(gid);
-		const Tileset &tileset = map.getTilesetFromGid(tile->getGid());
+		const auto &tileset = map.getTilesetFromGid(tile->getGid());
 		tile->setWidth(tileset.getTileWidth());
 		tile->setHeight(tileset.getTileHeight());
 		tile->setX((mapIterator % layer.getWidth())  *tileset.getTileWidth() + tileset.getOffsetX());

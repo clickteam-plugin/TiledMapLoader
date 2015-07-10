@@ -4,12 +4,12 @@ namespace TiledMapLoader {
 
 	XMLElement::XMLElement(rapidxml::xml_node<> &node) :
 		mNode(node) {
+
 	}
 
 	int XMLElement::getInt(const char *name, int defaultValue) const {
-		rapidxml::xml_attribute<> *result = 0;
-		char *value = 0;
-
+		rapidxml::xml_attribute<> *result = nullptr;
+		char *value = nullptr;
 		result = mNode.first_attribute(name);
 		if (!result)
 			return defaultValue;
@@ -20,9 +20,8 @@ namespace TiledMapLoader {
 	}
 
 	unsigned XMLElement::getUnsignedInt(const char *name, unsigned defaultValue) const {
-		rapidxml::xml_attribute<> *result = 0;
-		char *value = 0;
-
+		rapidxml::xml_attribute<> *result = nullptr;
+		char *value = nullptr;
 		result = mNode.first_attribute(name);
 		if (!result)
 			return defaultValue;
@@ -33,9 +32,8 @@ namespace TiledMapLoader {
 	}
 
 	float XMLElement::getFloat(const char *name, float defaultValue) const {
-		rapidxml::xml_attribute<> *result = 0;
-		char *value = 0;
-
+		rapidxml::xml_attribute<> *result = nullptr;
+		char *value = nullptr;
 		result = mNode.first_attribute(name);
 		if (!result)
 			return defaultValue;
@@ -46,9 +44,8 @@ namespace TiledMapLoader {
 	}
 
 	char *XMLElement::getString(const char *name, char *defaultValue) const {
-		rapidxml::xml_attribute<> *result = 0;
-		char *value = 0;
-
+		rapidxml::xml_attribute<> *result = nullptr;
+		char *value = nullptr;
 		result = mNode.first_attribute(name);
 		if (!result)
 			return defaultValue;
@@ -61,7 +58,6 @@ namespace TiledMapLoader {
 }
 
 char *TiledMapLoader::XMLElement::getValue(char *defaultValue) const {
-	char *value = mNode.value();
-
+	auto value = mNode.value();
 	return value ? value : defaultValue;
 }

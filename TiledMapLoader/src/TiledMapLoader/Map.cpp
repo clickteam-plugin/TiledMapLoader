@@ -78,8 +78,8 @@ namespace TiledMapLoader {
 
 	//TODO: Optimize this code
 	const Tileset &Map::getTilesetFromGid(unsigned gid) const {
-		for (const Tileset::Ptr &tileset : mTilesets) {
-			int limit = (tileset->getWidth() / (tileset->getTileWidth() + tileset->getSpacing()))  *(tileset->getHeight() / (tileset->getTileHeight() + tileset->getSpacing()));
+		for (const auto& tileset : mTilesets) {
+			auto limit = (tileset->getWidth() / (tileset->getTileWidth() + tileset->getSpacing()))  *(tileset->getHeight() / (tileset->getTileHeight() + tileset->getSpacing()));
 			if (gid >= tileset->getFirstGid() && gid < tileset->getFirstGid() + limit) {
 				return *(tileset.get());
 			}

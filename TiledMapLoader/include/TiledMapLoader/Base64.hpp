@@ -13,8 +13,8 @@ namespace Base64 {
 
 	inline std::string encode(unsigned char const *bytes_to_encode, unsigned int in_len) {
 		std::string ret;
-		int i = 0;
-		int j = 0;
+		auto i = 0;
+		auto j = 0;
 		unsigned char char_array_3[3];
 		unsigned char char_array_4[4];
 		while (in_len--) {
@@ -49,10 +49,10 @@ namespace Base64 {
 	}
 
 	inline std::string decode(std::string const &encoded_string) {
-		size_t in_len = encoded_string.size();
+		auto in_len = encoded_string.size();
 		size_t i = 0;
 		size_t j = 0;
-		int in_ = 0;
+		auto in_ = 0;
 		unsigned char char_array_4[4], char_array_3[3];
 		std::string ret;
 		while (in_len-- && (encoded_string[in_] != '=') && is_base64(encoded_string[in_])) {

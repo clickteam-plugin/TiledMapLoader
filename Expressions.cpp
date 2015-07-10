@@ -47,9 +47,8 @@ char *Extension::getMapVersion() {
 char *Extension::getMapProperty(char *name, char *defaultValue) {
 	if (!mMap)
 		return __(defaultValue);
-	std::map<std::string, std::string> properties = mMap->getProperties();
-
-	std::map<std::string, std::string>::const_iterator it = properties.find(name);
+	auto properties = mMap->getProperties();
+	auto const &it = properties.find(name);
 	if (it != properties.end())
 		return __(it->second.c_str());
 	return __(defaultValue);
@@ -131,9 +130,8 @@ int Extension::getTilesetYTileOffset() {
 char *Extension::getTilesetProperty(char *name, char *defaultValue) {
 	if (!mTileset)
 		return __(defaultValue);
-	std::map<std::string, std::string> properties = mTileset->getProperties();
-
-	std::map<std::string, std::string>::const_iterator it = properties.find(name);
+	auto properties = mTileset->getProperties();
+	auto const &it = properties.find(name);
 	if (it != properties.end())
 		return __(it->second.c_str());
 	return __(defaultValue);
@@ -172,9 +170,8 @@ int Extension::isLayerVisible() {
 char *Extension::getLayerProperty(char *name, char *defaultValue) {
 	if (!mLayer)
 		return __(defaultValue);
-	std::map<std::string, std::string> properties = mLayer->getProperties();
-
-	std::map<std::string, std::string>::const_iterator it = properties.find(name);
+	auto properties = mLayer->getProperties();
+	auto const &it = properties.find(name);
 	if (it != properties.end())
 		return __(it->second.c_str());
 	return __(defaultValue);
@@ -253,9 +250,8 @@ char *Extension::getTileProperty(char *name, char *defaultValue) {
 		const auto &tileset = mMap->getTilesets().at(mTile->getTilesetId());
 		if (!tileset)
 			return __(defaultValue);
-		std::map<std::string, std::string> properties = tileset->getTileProperties().at(mTile->getGid() - tileset->getFirstGid());
-
-		std::map<std::string, std::string>::const_iterator it = properties.find(name);
+		auto properties = tileset->getTileProperties().at(mTile->getGid() - tileset->getFirstGid());
+		auto const &it = properties.find(name);
 		if (it != properties.end())
 			return __(it->second.c_str());
 		return __(defaultValue);
@@ -304,9 +300,8 @@ int Extension::isObjectGroupVisible() {
 char *Extension::getObjectGroupProperty(char *name, char *defaultValue) {
 	if (!mObjectGroup)
 		return __(defaultValue);
-	std::map<std::string, std::string> properties = mObjectGroup->getProperties();
-
-	std::map<std::string, std::string>::const_iterator it = properties.find(name);
+	auto properties = mObjectGroup->getProperties();
+	auto const &it = properties.find(name);
 	if (it != properties.end())
 		return __(it->second.c_str());
 	return __(defaultValue);
@@ -327,13 +322,13 @@ char *Extension::getObjectType() {
 int Extension::getObjectPosOnMapX() {
 	if (!mObject)
 		return 0;
-	return (int) mObject->getX() + mOffsetX;
+	return static_cast<int>(mObject->getX()) + mOffsetX;
 }
 
 int Extension::getObjectPosOnMapY() {
 	if (!mObject)
 		return 0;
-	return (int) mObject->getY() + mOffsetY;
+	return static_cast<int>(mObject->getY()) + mOffsetY;
 }
 
 float Extension::getObjectWidth() {
@@ -363,7 +358,7 @@ int Extension::getObjectTileGid() {
 char *Extension::getObjectVertices(char *defaultValue) {
 	if (!mObject)
 		return __(defaultValue);
-	const char *vertices = mObject->getVertices().c_str();
+	auto vertices = mObject->getVertices().c_str();
 	if (!vertices || !_strcmpi(vertices, __("")))
 		return __(defaultValue);
 	return __(vertices);
@@ -372,10 +367,10 @@ char *Extension::getObjectVertices(char *defaultValue) {
 char *Extension::getObjectBox2DVertices(char *defaultValue) {
 	if (!mObject)
 		return __(defaultValue);
-	char *vertices = __(mObject->getVertices().c_str());
+	auto vertices = __(mObject->getVertices().c_str());
 	if (!vertices || !_strcmpi(vertices, __("")))
 		return __(defaultValue);
-	int i = 0;
+	auto i = 0;
 	while (vertices[i] != '\0') {
 		if (vertices[i] == ' ')
 			vertices[i] = ',';
@@ -429,9 +424,8 @@ int Extension::isObjectVisible() {
 char *Extension::getObjectProperty(char *name, char *defaultValue) {
 	if (!mObject)
 		return __(defaultValue);
-	std::map<std::string, std::string> properties = mObject->getProperties();
-
-	std::map<std::string, std::string>::const_iterator it = properties.find(name);
+	auto properties = mObject->getProperties();
+	auto const &it = properties.find(name);
 	if (it != properties.end())
 		return __(it->second.c_str());
 	return __(defaultValue);

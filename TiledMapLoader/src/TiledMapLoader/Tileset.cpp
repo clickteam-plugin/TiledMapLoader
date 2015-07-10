@@ -107,16 +107,14 @@ namespace TiledMapLoader {
 	}
 
 	int Tileset::getTilePositionOnTilesetX(const Tile &tile) const {
-		int pos = (tile.getGid() - getFirstGid()) % (getWidth() / (getTileWidth() + getSpacing()));
-		int space = getMargin() + getSpacing()  *pos;
-
+		auto pos = (tile.getGid() - getFirstGid()) % (getWidth() / (getTileWidth() + getSpacing()));
+		auto space = getMargin() + getSpacing()  *pos;
 		return pos  *getTileWidth() + space;
 	}
 
 	int Tileset::getTilePositionOnTilesetY(const Tile &tile) const {
-		int pos = (tile.getGid() - getFirstGid()) / (getWidth() / (getTileHeight() + getSpacing()));
-		int space = getMargin() + getSpacing()  *pos;
-
+		auto pos = (tile.getGid() - getFirstGid()) / (getWidth() / (getTileHeight() + getSpacing()));
+		auto space = getMargin() + getSpacing()  *pos;
 		return pos  *getTileHeight() + space;
 	}
 

@@ -11,7 +11,7 @@ namespace TiledMapLoader {
 	}
 
 	void Object::setGid(unsigned gid) {
-		mGid = gid  &~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG);
+		mGid = gid &~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG);
 		mFlippedHorizontally = gid  &FLIPPED_HORIZONTALLY_FLAG;
 		mFlippedVertically = gid  &FLIPPED_VERTICALLY_FLAG;
 		mFlippedDiagonally = gid  &FLIPPED_DIAGONALLY_FLAG;
