@@ -5,13 +5,11 @@
 
 #include "../lib/rapidxml/rapidxml.hpp"
 
-namespace TiledMapLoader
-{
+namespace TiledMapLoader {
 
-	class Property
-	{
+	class Property {
 	public:
-		typedef std::map<std::string, std::string> Properties;
+		using Properties = std::map<std::string, std::string>;
 
 	public:
 		void addProperty(const std::string &key, const std::string &value);

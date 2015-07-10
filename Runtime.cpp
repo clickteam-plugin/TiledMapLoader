@@ -4,25 +4,24 @@
 
 #if !defined(RUN_ONLY)
 // Identifiers of items displayed in the debugger
-enum
-{
-// Example
-// -------
-//	DB_CURRENTSTRING,
-//	DB_CURRENTVALUE,
-//	DB_CURRENTCHECK,
-//	DB_CURRENTCOMBO
+enum {
+	// Example
+	// -------
+	//	DB_CURRENTSTRING,
+	//	DB_CURRENTVALUE,
+	//	DB_CURRENTCHECK,
+	//	DB_CURRENTCOMBO
 };
 
 // Items displayed in the debugger
-WORD DebugTree[]=
+WORD DebugTree[] =
 {
-// Example
-// -------
-//	DB_CURRENTSTRING|DB_EDITABLE,
-//	DB_CURRENTVALUE|DB_EDITABLE,
-//	DB_CURRENTCHECK,
-//	DB_CURRENTCOMBO,
+	// Example
+	// -------
+	//	DB_CURRENTSTRING|DB_EDITABLE,
+	//	DB_CURRENTVALUE|DB_EDITABLE,
+	//	DB_CURRENTCHECK,
+	//	DB_CURRENTCOMBO,
 
 	// End of table (required)
 	DB_END
@@ -43,7 +42,7 @@ WORD DebugTree[]=
 // Note: do not forget to enable the function in the .def file 
 // if you remove the comments below.
 /*
-cSurface* WINAPI DLLExport GetRunObjectSurface(LPRDATA rdPtr)
+cSurface *WINAPI DLLExport GetRunObjectSurface(LPRDATA rdPtr)
 {
 	return NULL;
 }
@@ -66,7 +65,7 @@ LPSMASK WINAPI DLLExport GetRunObjectCollisionMask(LPRDATA rdPtr, LPARAM lParam)
 	// Typical example for active objects
 	// ----------------------------------
 	// Opaque? collide with box
-	if ( (rdPtr->rs.rsEffect & EFFECTFLAG_TRANSPARENT) == 0 )	// Note: only if your object has the OEPREFS_INKEFFECTS option
+	if ( (rdPtr->rs.rsEffect  &EFFECTFLAG_TRANSPARENT) == 0 )	// Note: only if your object has the OEPREFS_INKEFFECTS option
 		return NULL;
 
 	// Transparent? Create mask
@@ -110,17 +109,16 @@ LPSMASK WINAPI DLLExport GetRunObjectCollisionMask(LPRDATA rdPtr, LPARAM lParam)
 // Called when the application starts or restarts.
 // Useful for storing global data
 // 
-void WINAPI DLLExport StartApp(mv _far *mV, CRunApp* pApp)
-{
+void WINAPI DLLExport StartApp(mv _far  *mV, CRunApp *pApp) {
 	// Example
 	// -------
 	// Delete global data (if restarts application)
-//	CMyData* pData = (CMyData*)mV->mvGetExtUserData(pApp, hInstLib);
-//	if ( pData != NULL )
-//	{
-//		delete pData;
-//		mV->mvSetExtUserData(pApp, hInstLib, NULL);
-//	}
+	//	CMyData *pData = (CMyData*)mV->mvGetExtUserData(pApp, hInstLib);
+	//	if ( pData != NULL )
+	//	{
+	//		delete pData;
+	//		mV->mvSetExtUserData(pApp, hInstLib, NULL);
+	//	}
 }
 
 // -------------------
@@ -128,17 +126,16 @@ void WINAPI DLLExport StartApp(mv _far *mV, CRunApp* pApp)
 // -------------------
 // Called when the application ends.
 // 
-void WINAPI DLLExport EndApp(mv _far *mV, CRunApp* pApp)
-{
+void WINAPI DLLExport EndApp(mv _far  *mV, CRunApp *pApp) {
 	// Example
 	// -------
 	// Delete global data
-//	CMyData* pData = (CMyData*)mV->mvGetExtUserData(pApp, hInstLib);
-//	if ( pData != NULL )
-//	{
-//		delete pData;
-//		mV->mvSetExtUserData(pApp, hInstLib, NULL);
-//	}
+	//	CMyData *pData = (CMyData*)mV->mvGetExtUserData(pApp, hInstLib);
+	//	if ( pData != NULL )
+	//	{
+	//		delete pData;
+	//		mV->mvSetExtUserData(pApp, hInstLib, NULL);
+	//	}
 }
 
 // -------------------
@@ -146,8 +143,7 @@ void WINAPI DLLExport EndApp(mv _far *mV, CRunApp* pApp)
 // -------------------
 // Called when the frame starts or restarts.
 // 
-void WINAPI DLLExport StartFrame(mv _far *mV, DWORD dwReserved, int nFrameIndex)
-{
+void WINAPI DLLExport StartFrame(mv _far  *mV, DWORD dwReserved, int nFrameIndex) {
 }
 
 // -------------------
@@ -155,8 +151,7 @@ void WINAPI DLLExport StartFrame(mv _far *mV, DWORD dwReserved, int nFrameIndex)
 // -------------------
 // Called when the frame ends.
 // 
-void WINAPI DLLExport EndFrame(mv _far *mV, DWORD dwReserved, int nFrameIndex)
-{
+void WINAPI DLLExport EndFrame(mv _far  *mV, DWORD dwReserved, int nFrameIndex) {
 }
 
 // ============================================================================
@@ -175,7 +170,7 @@ void WINAPI DLLExport EndFrame(mv _far *mV, DWORD dwReserved, int nFrameIndex)
   // Note: do not forget to enable the functions in the .def file 
   // if you remove the comments below.
 
-void WINAPI GetRunObjectFont(LPRDATA rdPtr, LOGFONT* pLf)
+void WINAPI GetRunObjectFont(LPRDATA rdPtr, LOGFONT *pLf)
 {
 	// Example
 	// -------
@@ -187,7 +182,7 @@ void WINAPI GetRunObjectFont(LPRDATA rdPtr, LOGFONT* pLf)
 // -------------------
 // Change the font used by the object.
 // 
-void WINAPI SetRunObjectFont(LPRDATA rdPtr, LOGFONT* pLf, RECT* pRc)
+void WINAPI SetRunObjectFont(LPRDATA rdPtr, LOGFONT *pLf, RECT *pRc)
 {
 	// Example
 	// -------
@@ -294,13 +289,13 @@ LRESULT CALLBACK DLLExport WindowProc(LPRH rhPtr, HWND hWnd, UINT nMsg, WPARAM w
 // -----------------
 // This routine returns the address of the debugger tree
 //
-LPWORD WINAPI DLLExport GetDebugTree(LPRDATA rdPtr)
-{
+LPWORD WINAPI DLLExport GetDebugTree(LPRDATA rdPtr) {
 #if !defined(RUN_ONLY)
 	return DebugTree;
 #else
 	return NULL;
 #endif // !defined(RUN_ONLY)
+
 }
 
 // -----------------
@@ -308,13 +303,12 @@ LPWORD WINAPI DLLExport GetDebugTree(LPRDATA rdPtr)
 // -----------------
 // This routine returns the text of a given item.
 //
-void WINAPI DLLExport GetDebugItem(LPSTR pBuffer, LPRDATA rdPtr, int id)
-{
+void WINAPI DLLExport GetDebugItem(LPSTR pBuffer, LPRDATA rdPtr, int id) {
 #if !defined(RUN_ONLY)
 
 	// Example
 	// -------
-/*
+	/*
 	char temp[DB_BUFFERSIZE];
 
 	switch (id)
@@ -342,6 +336,7 @@ void WINAPI DLLExport GetDebugItem(LPSTR pBuffer, LPRDATA rdPtr, int id)
 */
 
 #endif // !defined(RUN_ONLY)
+
 }
 
 // -----------------
@@ -349,13 +344,12 @@ void WINAPI DLLExport GetDebugItem(LPSTR pBuffer, LPRDATA rdPtr, int id)
 // -----------------
 // This routine allows to edit editable items.
 //
-void WINAPI DLLExport EditDebugItem(LPRDATA rdPtr, int id)
-{
+void WINAPI DLLExport EditDebugItem(LPRDATA rdPtr, int id) {
 #if !defined(RUN_ONLY)
 
 	// Example
 	// -------
-/*
+	/*
 	switch (id)
 	{
 	case DB_CURRENTSTRING:
@@ -388,6 +382,5 @@ void WINAPI DLLExport EditDebugItem(LPRDATA rdPtr, int id)
 	}
 */
 #endif // !defined(RUN_ONLY)
+
 }
-
-

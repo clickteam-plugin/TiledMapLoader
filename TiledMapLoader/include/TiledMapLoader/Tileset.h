@@ -7,13 +7,11 @@
 #include <TiledMapLoader/Tile.h>
 #include <TiledMapLoader/Property.h>
 
-namespace TiledMapLoader
-{
+namespace TiledMapLoader {
 
-	class Tileset : public Property
-	{
+	class Tileset : public Property {
 	public:
-		typedef std::unique_ptr<Tileset> Ptr;
+		using Ptr = std::unique_ptr<Tileset>;
 
 	public:
 		unsigned getFirstGid() const;
@@ -22,12 +20,12 @@ namespace TiledMapLoader
 		void setHeight(int height);
 		int getId() const;
 		void setId(int id);
-		const std::string& getImageSource() const;
-		void setImageSource(const std::string& imageSource);
+		const std::string &getImageSource() const;
+		void setImageSource(const std::string &imageSource);
 		int getMargin() const;
 		void setMargin(int margin);
-		const std::string& getName() const;
-		void setName(const std::string& name);
+		const std::string &getName() const;
+		void setName(const std::string &name);
 		int getOffsetX() const;
 		void setOffsetX(int offsetX);
 		int getOffsetY() const;
@@ -40,7 +38,7 @@ namespace TiledMapLoader
 		void setTileWidth(int tileWidth);
 		int getWidth() const;
 		void setWidth(int width);
-		const std::map<int, std::map<std::string, std::string> >& getTileProperties() const;
+		const std::map<int, std::map<std::string, std::string>> &getTileProperties() const;
 		void addTileProperties(int tileId, const std::string &name, const std::string &value);
 
 	public:

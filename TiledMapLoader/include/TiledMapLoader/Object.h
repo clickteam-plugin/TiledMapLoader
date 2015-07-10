@@ -5,11 +5,9 @@
 
 #include <TiledMapLoader/Property.h>
 
-namespace TiledMapLoader
-{
+namespace TiledMapLoader {
 
-	class Object: public Property
-	{
+	class Object: public Property {
 	public:
 		typedef std::unique_ptr<Object> Ptr;
 
@@ -23,22 +21,22 @@ namespace TiledMapLoader
 		void setFlippedHorizontally(int flippedHorizontally);
 		int getFlippedVertically() const;
 		void setFlippedVertically(int flippedVertically);
-		int getHeight() const;
-		void setHeight(int height);
-		const std::string& getName() const;
-		void setName(const std::string& name);
-		const std::string& getPolygonType() const;
-		void setPolygonType(const std::string& polygonType);
-		float getRotation() const;
-		void setRotation(float rotation);
-		const std::string& getType() const;
-		void setType(const std::string& type);
-		const std::string& getVertices() const;
-		void setVertices(const std::string& vertices);
-		int getVisible() const;
-		void setVisible(int visible);
 		float getWidth() const;
 		void setWidth(float width);
+		float getHeight() const;
+		void setHeight(float height);
+		const std::string &getName() const;
+		void setName(const std::string &name);
+		const std::string &getPolygonType() const;
+		void setPolygonType(const std::string &polygonType);
+		float getRotation() const;
+		void setRotation(float rotation);
+		const std::string &getType() const;
+		void setType(const std::string &type);
+		const std::string &getVertices() const;
+		void setVertices(const std::string &vertices);
+		int getVisible() const;
+		void setVisible(int visible);
 		float getX() const;
 		void setX(float x);
 		float getY() const;

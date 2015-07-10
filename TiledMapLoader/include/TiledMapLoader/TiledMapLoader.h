@@ -1,22 +1,16 @@
 #pragma once
 
-#include <string>
-
+#include <TiledMapLoader/Map.h>
 #include "../lib/rapidxml/rapidxml.hpp"
 
-#include <TiledMapLoader/Map.h>
-#include <TiledMapLoader/XMLElement.h>
 
-
-namespace TiledMapLoader
-{
+namespace TiledMapLoader {
 
 	class Tileset;
 	class Layer;
 	class ObjectGroup;
 
-	class TiledMapLoader
-	{
+	class TiledMapLoader {
 	public:
 		Map::Ptr loadMap(const std::string &mapFile, const std::string &mapPath = ".");
 

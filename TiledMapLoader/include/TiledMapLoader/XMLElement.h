@@ -5,19 +5,17 @@
 
 #include "../lib/rapidxml/rapidxml.hpp"
 
-namespace TiledMapLoader
-{
+namespace TiledMapLoader {
 
-	class XMLElement
-	{
+	class XMLElement {
 	public:
-		XMLElement(rapidxml::xml_node<> &node);
+		explicit XMLElement(rapidxml::xml_node<> &node);
 
 	public:
 		int getInt(const char *name, int defaultValue = 0) const;
+		unsigned getUnsignedInt(const char *name, unsigned defaultValue = 0) const;
 		float getFloat(const char *name, float defaultValue = 0) const;
-		char *getString(const char *name, char *defaultValue = (char *) "") const;
-
+		char *getString(const char *name, char *defaultValue = static_cast<char *>("")) const;
 		char *getValue(char *defaultValue = nullptr) const;
 
 	private:

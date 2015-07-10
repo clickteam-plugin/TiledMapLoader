@@ -12,7 +12,7 @@ HINSTANCE hInstLib;
 
 // ============================================================================
 //
-// LIBRARY ENTRY & QUIT POINTS
+// LIBRARY ENTRY  &QUIT POINTS
 // 
 // ============================================================================
 
@@ -21,32 +21,29 @@ HINSTANCE hInstLib;
 // -----------------
 // Usually you do not need to do any initialization here: you will prefer to 
 // do them in "Initialize" found in Edittime.cpp
-BOOL WINAPI DllMain(HINSTANCE hDLL, DWORD dwReason, LPVOID lpReserved)
-{
-	switch (dwReason)
-	{
-		// DLL is attaching to the address space of the current process.
+BOOL WINAPI DllMain(HINSTANCE hDLL, DWORD dwReason, LPVOID lpReserved) {
+	switch (dwReason) {
+			// DLL is attaching to the address space of the current process.
 		case DLL_PROCESS_ATTACH:
-			
+
 			hInstLib = hDLL; // Store HINSTANCE
 			break;
 
-		// A new thread is being created in the current process.
+			// A new thread is being created in the current process.
 		case DLL_THREAD_ATTACH:
 			break;
 
-		// A thread is exiting cleanly.
+			// A thread is exiting cleanly.
 		case DLL_THREAD_DETACH:
 			break;
 
-		// The calling process is detaching the DLL from its address space.
-	    case DLL_PROCESS_DETACH:
+			// The calling process is detaching the DLL from its address space.
+		case DLL_PROCESS_DETACH:
 			break;
 	}
-	
+
 	return TRUE;
 }
-
 
 
 // -----------------
@@ -55,9 +52,8 @@ BOOL WINAPI DllMain(HINSTANCE hDLL, DWORD dwReason, LPVOID lpReserved)
 // Where you want to do COLD-START initialization.
 // Called when the extension is loaded into memory.
 //
-extern "C" int WINAPI DLLExport Initialize(mv _far *mV, int quiet)
-{
-    return Edif::Init(mV);
+extern "C" int WINAPI DLLExport Initialize(mv _far  *mV, int quiet) {
+	return Edif::Init(mV);
 
 
 	// No error
@@ -70,9 +66,8 @@ extern "C" int WINAPI DLLExport Initialize(mv _far *mV, int quiet)
 // Where you want to kill and initialized data opened in the above routine
 // Called just before freeing the DLL.
 // 
-extern "C" int WINAPI DLLExport Free(mv _far *mV)
-{
-    Edif::Free(mV);
+extern "C" int WINAPI DLLExport Free(mv _far  *mV) {
+	Edif::Free(mV);
 
 	// No error
 	return 0;
@@ -92,9 +87,8 @@ extern "C" int WINAPI DLLExport Free(mv _far *mV)
 // or from the CCN or EXE file (run time).
 // You can load data here, reserve memory etc...
 //
-int	WINAPI DLLExport LoadObject(mv _far *mV, LPCSTR fileName, LPEDATA edPtr, int reserved)
-{
-    Edif::Init(mV, edPtr);
+int WINAPI DLLExport LoadObject(mv _far  *mV, LPCSTR fileName, LPEDATA edPtr, int reserved) {
+	Edif::Init(mV, edPtr);
 
 
 	return 0;
@@ -106,8 +100,7 @@ int	WINAPI DLLExport LoadObject(mv _far *mV, LPCSTR fileName, LPEDATA edPtr, int
 // The counterpart of the above routine: called just before the object is
 // deleted from the frame.
 //
-void WINAPI DLLExport UnloadObject(mv _far *mV, LPEDATA edPtr, int reserved)
-{
+void WINAPI DLLExport UnloadObject(mv _far  *mV, LPEDATA edPtr, int reserved) {
 }
 
 // --------------------
@@ -116,8 +109,7 @@ void WINAPI DLLExport UnloadObject(mv _far *mV, LPEDATA edPtr, int reserved)
 // For you to update your object structure to newer versions
 // Called at both edit time and run time
 // 
-HGLOBAL WINAPI DLLExport UpdateEditStructure(mv __far *mV, void __far * OldEdPtr)
-{
+HGLOBAL WINAPI DLLExport UpdateEditStructure(mv __far  *mV, void __far  *OldEdPtr) {
 	// We do nothing here
 	return 0;
 }
@@ -131,8 +123,7 @@ HGLOBAL WINAPI DLLExport UpdateEditStructure(mv __far *mV, void __far * OldEdPtr
 //
 // Call lpfnUpdate to update your file pathname (refer to the documentation)
 // 
-void WINAPI DLLExport UpdateFileNames(mv _far *mV, LPSTR appName, LPEDATA edPtr, void (WINAPI * lpfnUpdate)(LPSTR, LPSTR))
-{
+void WINAPI DLLExport UpdateFileNames(mv _far  *mV, LPSTR appName, LPEDATA edPtr, void (WINAPI  *lpfnUpdate)(LPSTR, LPSTR)) {
 }
 
 // ---------------------

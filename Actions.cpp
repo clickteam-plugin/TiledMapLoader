@@ -1,16 +1,12 @@
 #include "Common.h"
 
-std::string getPathFromFile(const std::string &mapFile)
-{
+std::string getPathFromFile(const std::string &mapFile) {
 	std::size_t found = mapFile.find_last_of("/\\");
-
 	return mapFile.substr(0, found);
 }
 
-void Extension::loadMap(char *mapFile)
-{
-	try
-	{
+void Extension::loadMap(char *mapFile) {
+	try {
 		TiledMapLoader::Map::Ptr map;
 		TiledMapLoader::TiledMapLoader loader;
 
@@ -22,48 +18,41 @@ void Extension::loadMap(char *mapFile)
 		const auto &layers = map->getLayers();
 		const auto &objectGroups = map->getObjectGroups();
 
-		for (const auto &tileset : tilesets)
-		{
+		for (const auto &tileset : tilesets) {
 			mTileset = tileset.get();
 			raiseEvent(Conditions::CONDITION_TILESET_LOADED);
 		}
-		for (const auto &layer : layers)
-		{
+		for (const auto &layer : layers) {
 			mLayer = layer.get();
 			raiseEvent(Conditions::CONDITION_LAYER_LOADED);
 
 			const auto &tiles = layer->getTiles();
 
-			for (const auto &tile : tiles)
-			{
+			for (const auto &tile : tiles) {
 				mTile = tile.get();
 				raiseEvent(Conditions::CONDITION_TILE_LOADED);
 			}
 		}
-		for (const auto &objectGroup : objectGroups)
-		{
+		for (const auto &objectGroup : objectGroups) {
 			mObjectGroup = objectGroup.get();
 			raiseEvent(Conditions::CONDITION_OBJECT_GROUP_LOADED);
 
 			const auto &objects = objectGroup->getObjects();
 
-			for (const auto &object : objects)
-			{
+			for (const auto &object : objects) {
 				mObject = object.get();
 				raiseEvent(Conditions::CONDITION_OBJECT_LOADED);
 			}
 		}
 		raiseEvent(Conditions::CONDITION_PARSING_FINISHED);
 	}
-	catch (std::exception &exception)
-	{
+	catch (std::exception &exception) {
 		mLastError = exception.what();
 		raiseEvent(Conditions::CONDITION_RAISE_ERROR);
 	}
 }
 
-void Extension::setMapOffset(int offsetX, int offsetY)
-{
+void Extension::setMapOffset(int offsetX, int offsetY) {
 	mOffsetX = offsetX;
 	mOffsetY = offsetY;
 }

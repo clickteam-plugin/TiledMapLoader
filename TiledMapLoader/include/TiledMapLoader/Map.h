@@ -9,16 +9,14 @@
 #include <TiledMapLoader/Tileset.h>
 #include <TiledMapLoader/ObjectGroup.h>
 
-namespace TiledMapLoader
-{
+namespace TiledMapLoader {
 
-	class Map: public Property
-	{
+	class Map: public Property {
 	public:
-		typedef std::unique_ptr<Map> Ptr;
-		typedef std::vector<Tileset::Ptr> Tilesets;
-		typedef std::vector<Layer::Ptr> Layers;
-		typedef std::vector<ObjectGroup::Ptr> ObjectGroups;
+		using Ptr = std::unique_ptr<Map>;
+		using Tilesets = std::vector<Tileset::Ptr>;
+		using Layers = std::vector<Layer::Ptr>;
+		using ObjectGroups = std::vector<ObjectGroup::Ptr>;
 
 	public:
 		const Tilesets &getTilesets() const;
@@ -33,14 +31,14 @@ namespace TiledMapLoader
 	public:
 		int getHeight() const;
 		void setHeight(int height);
-		const std::string& getOrientation() const;
-		void setOrientation(const std::string& orientation);
+		const std::string &getOrientation() const;
+		void setOrientation(const std::string &orientation);
 		int getTileHeight() const;
 		void setTileHeight(int tileHeight);
 		int getTileWidth() const;
 		void setTileWidth(int tileWidth);
-		const std::string& getVersion() const;
-		void setVersion(const std::string& version);
+		const std::string &getVersion() const;
+		void setVersion(const std::string &version);
 		int getWidth() const;
 		void setWidth(int width);
 

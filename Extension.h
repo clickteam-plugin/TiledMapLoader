@@ -1,12 +1,11 @@
 #define IDS_EXT_VERSION	5
 #define EXT_VERSION "tiledmaploader #13"
 
-class Extension
-{
+class Extension {
 public:
 
 	LPRDATA rdPtr;
-	LPRH    rhPtr;
+	LPRH rhPtr;
 
 	Edif::Runtime Runtime;
 
@@ -22,6 +21,7 @@ public:
 	~Extension();
 
 #include "RExtension.h"
+
 
 	void Action(int ID, LPRDATA rdPtr, long param1, long param2);
 	long Condition(int ID, LPRDATA rdPtr, long param1, long param2);

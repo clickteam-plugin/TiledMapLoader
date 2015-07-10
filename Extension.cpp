@@ -1,8 +1,7 @@
 #include "Common.h"
 
 Extension::Extension(LPRDATA _rdPtr, LPEDATA edPtr, fpcob cobPtr)
-	: rdPtr(_rdPtr), rhPtr(_rdPtr->rHo.hoAdRunHeader), Runtime(_rdPtr)
-{
+	: rdPtr(_rdPtr), rhPtr(_rdPtr->rHo.hoAdRunHeader), Runtime(_rdPtr) {
 	mOffsetX = 0;
 	mOffsetY = 0;
 	mLastError = nullptr;
@@ -86,45 +85,37 @@ Extension::Extension(LPRDATA _rdPtr, LPEDATA edPtr, fpcob cobPtr)
 	LinkExpression(Expressions::EXPRESSION_OBJECT_ID, getObjectId);
 }
 
-void Extension::raiseError(const char *error)
-{
+void Extension::raiseError(const char *error) {
 	mLastError = error;
 	raiseEvent(Conditions::CONDITION_RAISE_ERROR);
 }
 
-void Extension::raiseEvent(int eventCode)
-{
+void Extension::raiseEvent(int eventCode) {
 	Runtime.GenerateEvent(eventCode);
 }
 
-Extension::~Extension()
-{
-	
+Extension::~Extension() {
+
 }
 
-short Extension::Handle()
-{
+short Extension::Handle() {
 	return REFLAG_ONESHOT;
 }
 
 
-short Extension::Display()
-{
+short Extension::Display() {
 	return 0;
 }
 
-short Extension::Pause()
-{
+short Extension::Pause() {
 	return 0;
 }
 
-short Extension::Continue()
-{
+short Extension::Continue() {
 	return 0;
 }
 
-bool Extension::Save(HANDLE File)
-{
+bool Extension::Save(HANDLE File) {
 	bool OK = false;
 
 #ifndef VITALIZE
@@ -134,8 +125,7 @@ bool Extension::Save(HANDLE File)
 	return OK;
 }
 
-bool Extension::Load(HANDLE File)
-{
+bool Extension::Load(HANDLE File) {
 	bool OK = false;
 
 #ifndef VITALIZE
@@ -145,18 +135,14 @@ bool Extension::Load(HANDLE File)
 	return OK;
 }
 
-void Extension::Action(int ID, LPRDATA rdPtr, long param1, long param2)
-{
+void Extension::Action(int ID, LPRDATA rdPtr, long param1, long param2) {
 
 }
 
-long Extension::Condition(int ID, LPRDATA rdPtr, long param1, long param2)
-{
+long Extension::Condition(int ID, LPRDATA rdPtr, long param1, long param2) {
 	return false;
 }
 
-long Extension::Expression(int ID, LPRDATA rdPtr, long param)
-{
+long Extension::Expression(int ID, LPRDATA rdPtr, long param) {
 	return 0;
 }
-

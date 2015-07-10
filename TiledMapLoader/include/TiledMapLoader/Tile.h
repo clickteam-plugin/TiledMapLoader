@@ -2,13 +2,11 @@
 
 #include <memory>
 
-namespace TiledMapLoader
-{
+namespace TiledMapLoader {
 
-	class Tile
-	{
+	class Tile {
 	public:
-		typedef std::unique_ptr<Tile> Ptr;
+		using Ptr = std::unique_ptr<Tile>;
 
 		unsigned getGid() const;
 		void setGid(unsigned gid);

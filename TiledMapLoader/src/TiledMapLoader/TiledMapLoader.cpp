@@ -3,7 +3,7 @@
 #define chdir _chdir
 #define getcwd _getcwd
 #else
-#include <unistd.h>
+	#include <unistd.h>
 #endif
 
 #include <cstring>
@@ -18,52 +18,42 @@
 #include <TiledMapLoader/TiledMapLoader.h>
 #include <TiledMapLoader/StringUtils.h>
 #include <TiledMapLoader/Base64.hpp>
+#include <TiledMapLoader/XMLElement.h>
 
-namespace TiledMapLoader
-{
-
-	Map::Ptr TiledMapLoader::loadMap(const std::string &mapFile, const std::string &mapPath)
-	{
+namespace TiledMapLoader {
+	Map::Ptr TiledMapLoader::loadMap(const std::string &mapFile, const std::string &mapPath) {
 		Map::Ptr mapPtr(new Map);
 		changeCurrentDirectory(mapPath);
 		std::ifstream in(mapFile);
 		std::string fileContentString;
-
-		if (in.fail())
+		if (in.fail()) {
 			throw std::logic_error("File not found: " + mapPath + "/" + mapFile);
-
+		}
 		fileContentString.assign(std::istreambuf_iterator<char>(in), std::istreambuf_iterator<char>());
 		fileContentString.push_back(0);
-
 		loadInternalMap(*mapPtr.get(), &fileContentString[0]);
 		restoreCurrentDirectory();
 		return std::move(mapPtr);
 	}
 
-	inline void TiledMapLoader::changeCurrentDirectory(const std::string &mapPath)
-	{
+	inline void TiledMapLoader::changeCurrentDirectory(const std::string &mapPath) {
 		getcwd(mCwd, 1024);
 		chdir(mapPath.c_str());
 	}
 
-	void TiledMapLoader::restoreCurrentDirectory()
-	{
+	void TiledMapLoader::restoreCurrentDirectory() {
 		chdir(mCwd);
 	}
 
-	void TiledMapLoader::loadInternalMap(Map &map, char *xml)
-	{
+	void TiledMapLoader::loadInternalMap(Map &map, char *xml) {
 		rapidxml::xml_document<> document;
 		rapidxml::xml_node<> *rootNode = nullptr;
-
 		document.parse<rapidxml::parse_no_data_nodes>(xml);
 		rootNode = document.first_node("map");
-
-		if (!rootNode)
+		if (!rootNode) {
 			throw std::logic_error("Invalid tiled map: no map tag");
-
+		}
 		rapidxml::xml_node<> &rootNodeRef = *rootNode;
-
 		XMLElement mapElement(*rootNode);
 		map.setVersion(mapElement.getString("version"));
 		map.setWidth(mapElement.getInt("width"));
@@ -77,83 +67,70 @@ namespace TiledMapLoader
 		loadObjectGroups(map, rootNodeRef);
 	}
 
-	void TiledMapLoader::loadTilesets(Map &map, rapidxml::xml_node<> &rootNode)
-	{
+	void TiledMapLoader::loadTilesets(Map &map, rapidxml::xml_node<> &rootNode) {
 		rapidxml::xml_node<> *tilesetNode = rootNode.first_node("tileset");
 		char *tilesetSource = nullptr;
 		int tilesetId = 0;
-
-		if (!tilesetNode)
+		if (!tilesetNode) {
 			throw std::logic_error("Invalid tiled map: no tileset tag");
-
-		while (tilesetNode)
-		{
+		}
+		while (tilesetNode) {
 			XMLElement tilesetElement(*tilesetNode);
 			tilesetSource = tilesetElement.getString("source", nullptr);
 
-			if (tilesetSource)
+			if (tilesetSource) {
 				loadExternalTileset(map, tilesetId, tilesetSource, tilesetElement.getInt("firstgid"));
-			else
+			} else {
 				addTileset(map, tilesetId, *tilesetNode);
+			}
 			tilesetNode = tilesetNode->next_sibling("tileset");
 			++tilesetId;
 		}
 	}
 
-	void TiledMapLoader::loadExternalTileset(Map& map, int tilesetId, const std::string& tilesetFile, unsigned firstGid)
-	{
+	void TiledMapLoader::loadExternalTileset(Map &map, int tilesetId, const std::string &tilesetFile, unsigned firstGid) {
 		rapidxml::xml_document<> document;
 		rapidxml::xml_node<> *tilesetNode = nullptr;
 		std::ifstream in(tilesetFile);
 		std::string fileContentString;
-
-		if (in.fail())
+		if (in.fail()) {
 			throw std::logic_error("File not found (external tileset) : " + tilesetFile);
-
+		}
 		fileContentString.assign(std::istreambuf_iterator<char>(in), std::istreambuf_iterator<char>());
 		fileContentString.push_back(0);
-
 		document.parse<rapidxml::parse_no_data_nodes>(&fileContentString[0]);
-
 		tilesetNode = document.first_node("tileset");
-
-		if (!tilesetNode)
+		if (!tilesetNode) {
 			throw std::logic_error("Invalid tiled map: no tileset tag (external tileset " + tilesetFile + ")");
-
+		}
 		addTileset(map, tilesetId, *tilesetNode, firstGid);
 	}
 
-	void TiledMapLoader::addTileset(Map &map, int tilesetId, rapidxml::xml_node<> &tilesetNode, unsigned firstGid)
-	{
+	void TiledMapLoader::addTileset(Map &map, int tilesetId, rapidxml::xml_node<> &tilesetNode, unsigned firstGid) {
 		Tileset::Ptr tileset(new Tileset);
 		rapidxml::xml_node<> *tilesetImageNode = nullptr;
 		rapidxml::xml_node<> *tilesetOffsetNode = nullptr;
-
 		tilesetImageNode = tilesetNode.first_node("image");
-
-		if (!tilesetImageNode)
+		if (!tilesetImageNode) {
 			throw std::logic_error("Invalid tiled map: no tileset image tag");
-
+		}
 		XMLElement tilesetElement(tilesetNode);
 		XMLElement tilesetImageElement(*tilesetImageNode);
-
 		tilesetOffsetNode = tilesetNode.first_node("tileoffset");
-		if (tilesetOffsetNode)
-		{
+		if (tilesetOffsetNode) {
 			XMLElement element(*tilesetOffsetNode);
 			tileset->setOffsetX(element.getInt("x"));
 			tileset->setOffsetY(element.getInt("y"));
-		}
-		else
-		{
+		} else {
 			tileset->setOffsetX(0);
 			tileset->setOffsetY(0);
 		}
 		tileset->setId(tilesetId);
-		if (firstGid)
+		if (firstGid) {
 			tileset->setFirstGid(firstGid);
-		else
+		} else {
 			tileset->setFirstGid(tilesetElement.getInt("firstgid"));
+		}
 		tileset->setName(tilesetElement.getString("name"));
 		tileset->setTileWidth(tilesetElement.getInt("tilewidth"));
 		tileset->setTileHeight(tilesetElement.getInt("tileheight"));
@@ -167,29 +144,24 @@ namespace TiledMapLoader
 		map.addTileset(std::move(tileset));
 	}
 
-	void TiledMapLoader::parseTilesetsTileProperties(Map &map, Tileset &tileset, rapidxml::xml_node<> &tilesetNode)
-	{
-		rapidxml::xml_node<> *tilesetTileNode = 0;
-		rapidxml::xml_node<> *tilesetTileNodeProperties = 0;
-		rapidxml::xml_node<> *tilesetTileNodeProperty = 0;
+	void TiledMapLoader::parseTilesetsTileProperties(Map &map, Tileset &tileset, rapidxml::xml_node<> &tilesetNode) {
+		rapidxml::xml_node<> *tilesetTileNode = nullptr;
+		rapidxml::xml_node<> *tilesetTileNodeProperties = nullptr;
+		rapidxml::xml_node<> *tilesetTileNodeProperty = nullptr;
 
 		tilesetTileNode = tilesetNode.first_node("tile");
-		while (tilesetTileNode)
-		{
+		while (tilesetTileNode) {
 			tilesetTileNodeProperties = tilesetTileNode->first_node("properties");
-			if (tilesetTileNodeProperties)
-			{
+			if (tilesetTileNodeProperties) {
 				tilesetTileNodeProperty = tilesetTileNodeProperties->first_node("property");
-				while (tilesetTileNodeProperty)
-				{
+				while (tilesetTileNodeProperty) {
 					XMLElement tileNode(*tilesetTileNode);
 					XMLElement tileNodeProperty(*tilesetTileNodeProperty);
-
 					char *name = tileNodeProperty.getString("name");
 					char *value = tileNodeProperty.getString("value");
-
-					if (name && value)
+					if (name && value) {
 						tileset.addTileProperties(tileNode.getInt("id"), name, value);
+					}
 					tilesetTileNodeProperty = tilesetTileNodeProperty->next_sibling("property");
 				}
 			}
@@ -197,24 +169,21 @@ namespace TiledMapLoader
 		}
 	}
 
-	void TiledMapLoader::loadLayers(Map &map, rapidxml::xml_node<> &rootNode)
-	{
+	void TiledMapLoader::loadLayers(Map &map, rapidxml::xml_node<> &rootNode) {
 		rapidxml::xml_node<> *layerNode = nullptr;
 		rapidxml::xml_node<> *layerDataNode = nullptr;
 		int layerId = 0;
-
 		layerNode = rootNode.first_node("layer");
-		if (!layerNode)
+		if (!layerNode) {
 			throw std::logic_error("Invalid tiled map: no layer tag");
-		while (layerNode)
-		{
+		}
+		while (layerNode) {
 			Layer::Ptr layer(new Layer);
 			layerDataNode = layerNode->first_node("data");
-			if (!layerDataNode)
+			if (!layerDataNode) {
 				throw std::logic_error("Invalid tiled map : no layer data tag");
-
+			}
 			XMLElement layerElement(*layerNode);
-
 			layer->setId(layerId);
 			layer->setName(layerElement.getString("name"));
 			layer->setWidth(layerElement.getInt("width"));
@@ -229,29 +198,24 @@ namespace TiledMapLoader
 		}
 	}
 
-	void TiledMapLoader::loadLayerTiles(Map &map, Layer& layer, rapidxml::xml_node<>& layerDataNode)
-	{
+	void TiledMapLoader::loadLayerTiles(Map &map, Layer &layer, rapidxml::xml_node<> &layerDataNode) {
 		rapidxml::xml_node<> *tileNode = nullptr;
 		XMLElement layerDataElement(layerDataNode);
 		unsigned mapIterator = 0;
 		unsigned gid = 0;
-
-		if (!strncmp(layerDataElement.getString("encoding"), "base64", 6) && !strncmp(layerDataElement.getString("compression"), "zlib", 4))
-		{
+		if (!strncmp(layerDataElement.getString("encoding"), "base64", 6) && !strncmp(layerDataElement.getString("compression"), "zlib", 4)) {
 			std::string base64Tiles = Base64::decode(trim(layerDataElement.getValue()));
-			unsigned numberOfGids = layer.getWidth() * layer.getHeight();
+			unsigned numberOfGids = layer.getWidth()  *layer.getHeight();
 			unsigned tileIndex = 0;
 			mz_ulong uncompressSize = numberOfGids << 2;
 			unsigned char *gids = new unsigned char[uncompressSize];
-
-			if (!gids)
+			if (!gids) {
 				throw std::logic_error("Uncompression failed: can't allocate memory");
-
-			if (mz_uncompress(gids, &uncompressSize, (unsigned char *)base64Tiles.c_str(), base64Tiles.length()) != MZ_OK)
+			}
+			if (mz_uncompress(gids, &uncompressSize, (unsigned char *) base64Tiles.c_str(), base64Tiles.length()) != MZ_OK) {
 				throw std::logic_error("Zlib error: uncompression failed");
-
-			while (mapIterator < numberOfGids)
-			{
+			}
+			while (mapIterator < numberOfGids) {
 				gid = gids[tileIndex] | gids[tileIndex + 1] << 8 | gids[tileIndex + 2] << 16 | gids[tileIndex + 3] << 24;
 				if (gid)
 					createTileFromGid(map, layer, gid, mapIterator);
@@ -260,51 +224,44 @@ namespace TiledMapLoader
 			}
 			delete[] gids;
 		}
-		else
-		{
+		else {
 			tileNode = layerDataNode.first_node("tile");
-			if (!tileNode)
+			if (!tileNode) {
 				throw std::logic_error("Invalid tiled map: no tiles (only plain XML or ZLIB supported)");
-			while (tileNode)
-			{
+			}
+			while (tileNode) {
 				XMLElement tileElement(*tileNode);
-				gid = tileElement.getInt("gid");
-				if (gid)
+				gid = tileElement.getUnsignedInt("gid");
+				if (gid) {
 					createTileFromGid(map, layer, gid, mapIterator);
+				}
 				tileNode = tileNode->next_sibling("tile");
 				++mapIterator;
 			}
 		}
 	}
 
-	void TiledMapLoader::createTileFromGid(Map &map, Layer &layer, unsigned gid, unsigned mapIterator)
-	{
-		const Tileset &tileset = map.getTilesetFromGid(gid);
+	void TiledMapLoader::createTileFromGid(Map &map, Layer &layer, unsigned gid, unsigned mapIterator) {
 		Tile::Ptr tile(new Tile);
 		Tile &tileRef = *tile.get();
-
 		tile->setGid(gid);
+		const Tileset &tileset = map.getTilesetFromGid(tile->getGid());
 		tile->setWidth(tileset.getTileWidth());
 		tile->setHeight(tileset.getTileHeight());
-		tile->setX((mapIterator % layer.getWidth()) * tileset.getTileWidth() + tileset.getOffsetX());
-		tile->setY((mapIterator / layer.getWidth()) * tileset.getTileHeight() + tileset.getOffsetY());
+		tile->setX((mapIterator % layer.getWidth())  *tileset.getTileWidth() + tileset.getOffsetX());
+		tile->setY((mapIterator / layer.getWidth())  *tileset.getTileHeight() + tileset.getOffsetY());
 		tile->setTilesetId(tileset.getId());
 		tile->setTilesetX(tileset.getTilePositionOnTilesetX(tileRef));
 		tile->setTilesetY(tileset.getTilePositionOnTilesetY(tileRef));
 		layer.addTile(std::move(tile));
 	}
 
-	void TiledMapLoader::loadObjectGroups(Map &map, rapidxml::xml_node<> &rootNode)
-	{
+	void TiledMapLoader::loadObjectGroups(Map &map, rapidxml::xml_node<> &rootNode) {
 		rapidxml::xml_node<> *objectGroupNode = nullptr;
-
 		objectGroupNode = rootNode.first_node("objectgroup");
-		while (objectGroupNode)
-		{
+		while (objectGroupNode) {
 			ObjectGroup::Ptr objectGroup(new ObjectGroup);
-
 			XMLElement objectGroupElement(*objectGroupNode);
-
 			objectGroup->setName(objectGroupElement.getString("name"));
 			objectGroup->setDrawOrder(objectGroupElement.getString("draworder"));
 			objectGroup->setWidth(objectGroupElement.getInt("width"));
@@ -318,18 +275,13 @@ namespace TiledMapLoader
 		}
 	}
 
-	void TiledMapLoader::loadObjectGroupObjects(Map& map, ObjectGroup& objectGroup, rapidxml::xml_node<>& objectGroupNode)
-	{
+	void TiledMapLoader::loadObjectGroupObjects(Map &map, ObjectGroup &objectGroup, rapidxml::xml_node<> &objectGroupNode) {
 		rapidxml::xml_node<> *objectNode = nullptr;
 		rapidxml::xml_node<> *objectNature = nullptr;
-
 		objectNode = objectGroupNode.first_node("object");
-		while (objectNode)
-		{
+		while (objectNode) {
 			Object::Ptr object(new Object);
-
 			XMLElement objectGroupElement(*objectNode);
-
 			object->setGid(objectGroupElement.getInt("gid", -1));
 			object->setId(objectGroupElement.getInt("id", -1));
 			object->setName(objectGroupElement.getString("name"));
@@ -340,33 +292,27 @@ namespace TiledMapLoader
 			object->setHeight(objectGroupElement.getFloat("height"));
 			object->setRotation(objectGroupElement.getFloat("rotation"));
 			object->setVisible(objectGroupElement.getInt("visible", 1));
-
 			objectNature = objectNode->first_node("ellipse");
-			if (objectNature)
+			if (objectNature) {
 				object->setPolygonType("ellipse");
-
+			}
 			objectNature = objectNode->first_node("polygon");
-			if (objectNature)
-			{
+			if (objectNature) {
 				XMLElement objectNatureElement(*objectNature);
 
 				object->setPolygonType("polygon");
 				object->setVertices(objectNatureElement.getString("points"));
 			}
-
 			objectNature = objectNode->first_node("polyline");
-			if (objectNature)
-			{
+			if (objectNature) {
 				XMLElement objectNatureElement(*objectNature);
 
 				object->setPolygonType("polyline");
 				object->setVertices(objectNatureElement.getString("points"));
 			}
-
 			object->parseProperties(*objectNode);
 			objectGroup.addObject(std::move(object));
 			objectNode = objectNode->next_sibling("object");
 		}
 	}
 }
-

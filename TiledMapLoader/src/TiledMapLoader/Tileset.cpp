@@ -1,152 +1,123 @@
 #include <TiledMapLoader/Tileset.h>
 
-namespace TiledMapLoader
-{
+namespace TiledMapLoader {
 
-	unsigned Tileset::getFirstGid() const
-	{
+	unsigned Tileset::getFirstGid() const {
 		return mFirstGid;
 	}
 
-	void Tileset::setFirstGid(unsigned firstGid)
-	{
+	void Tileset::setFirstGid(unsigned firstGid) {
 		mFirstGid = firstGid;
 	}
 
-	int Tileset::getHeight() const
-	{
+	int Tileset::getHeight() const {
 		return mHeight;
 	}
 
-	void Tileset::setHeight(int height)
-	{
+	void Tileset::setHeight(int height) {
 		mHeight = height;
 	}
 
-	int Tileset::getId() const
-	{
+	int Tileset::getId() const {
 		return mId;
 	}
 
-	void Tileset::setId(int id)
-	{
+	void Tileset::setId(int id) {
 		mId = id;
 	}
 
-	const std::string& Tileset::getImageSource() const
-	{
+	const std::string &Tileset::getImageSource() const {
 		return mImageSource;
 	}
 
-	void Tileset::setImageSource(const std::string& imageSource)
-	{
+	void Tileset::setImageSource(const std::string &imageSource) {
 		mImageSource = imageSource;
 	}
 
-	int Tileset::getMargin() const
-	{
+	int Tileset::getMargin() const {
 		return mMargin;
 	}
 
-	void Tileset::setMargin(int margin)
-	{
+	void Tileset::setMargin(int margin) {
 		mMargin = margin;
 	}
 
-	const std::string& Tileset::getName() const
-	{
+	const std::string &Tileset::getName() const {
 		return mName;
 	}
 
-	void Tileset::setName(const std::string& name)
-	{
+	void Tileset::setName(const std::string &name) {
 		mName = name;
 	}
 
-	int Tileset::getOffsetX() const
-	{
+	int Tileset::getOffsetX() const {
 		return mOffsetX;
 	}
 
-	void Tileset::setOffsetX(int offsetX)
-	{
+	void Tileset::setOffsetX(int offsetX) {
 		mOffsetX = offsetX;
 	}
 
-	int Tileset::getOffsetY() const
-	{
+	int Tileset::getOffsetY() const {
 		return mOffsetY;
 	}
 
-	void Tileset::setOffsetY(int offsetY)
-	{
+	void Tileset::setOffsetY(int offsetY) {
 		mOffsetY = offsetY;
 	}
 
-	int Tileset::getSpacing() const
-	{
+	int Tileset::getSpacing() const {
 		return mSpacing;
 	}
 
-	void Tileset::setSpacing(int spacing)
-	{
+	void Tileset::setSpacing(int spacing) {
 		mSpacing = spacing;
 	}
 
-	int Tileset::getTileHeight() const
-	{
+	int Tileset::getTileHeight() const {
 		return mTileHeight;
 	}
 
-	void Tileset::setTileHeight(int tileHeight)
-	{
+	void Tileset::setTileHeight(int tileHeight) {
 		mTileHeight = tileHeight;
 	}
 
-	int Tileset::getTileWidth() const
-	{
+	int Tileset::getTileWidth() const {
 		return mTileWidth;
 	}
 
-	void Tileset::setTileWidth(int tileWidth)
-	{
+	void Tileset::setTileWidth(int tileWidth) {
 		mTileWidth = tileWidth;
 	}
 
-	int Tileset::getWidth() const
-	{
+	int Tileset::getWidth() const {
 		return mWidth;
 	}
 
-	void Tileset::setWidth(int width)
-	{
+	void Tileset::setWidth(int width) {
 		mWidth = width;
 	}
 
-	const std::map<int, std::map<std::string, std::string> >& Tileset::getTileProperties() const
-	{
+	const std::map<int, std::map<std::string, std::string>> &Tileset::getTileProperties() const {
 		return mTileProperties;
 	}
 
-	void TiledMapLoader::Tileset::addTileProperties(int tileId, const std::string& name, const std::string& value)
-	{
+	void TiledMapLoader::Tileset::addTileProperties(int tileId, const std::string &name, const std::string &value) {
 		mTileProperties[tileId][name] = value;
 	}
 
-	int Tileset::getTilePositionOnTilesetX(const Tile& tile) const
-	{
+	int Tileset::getTilePositionOnTilesetX(const Tile &tile) const {
 		int pos = (tile.getGid() - getFirstGid()) % (getWidth() / (getTileWidth() + getSpacing()));
-		int space = getMargin() + getSpacing() * pos;
+		int space = getMargin() + getSpacing()  *pos;
 
-		return pos * getTileWidth() + space;
+		return pos  *getTileWidth() + space;
 	}
 
-	int Tileset::getTilePositionOnTilesetY(const Tile& tile) const
-	{
+	int Tileset::getTilePositionOnTilesetY(const Tile &tile) const {
 		int pos = (tile.getGid() - getFirstGid()) / (getWidth() / (getTileHeight() + getSpacing()));
-		int space = getMargin() + getSpacing() * pos;
+		int space = getMargin() + getSpacing()  *pos;
 
-		return pos * getTileHeight() + space;
+		return pos  *getTileHeight() + space;
 	}
 
 }
